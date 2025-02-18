@@ -7,7 +7,16 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>Login Page</h1>
-    <a href="{{url_for('register')}}">Don't have an account? Sign Up</a>
+    <h1>Login</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>  <!-- 🔥 Corrección aquí -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>

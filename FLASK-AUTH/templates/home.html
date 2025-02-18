@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home Page</title>
 </head>
 <body>
-    <h1>Login Authentication System in Flask</h1>
-    <a href="{{url_for('login')}}">Login Page</a><br>
-    <a href="{{url_for('register')}}">Register Page</a><br>
-
+    <h1>Home Page</h1>
+    {% if username %}
+        <p>Hello, {{ username }}! You are already logged in.</p>
+        <a href="{{ url_for('logout') }}">Logout</a>  <!-- 🔥 CORRECCIÓN AQUÍ -->
+    {% else %}
+        <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
+    {% endif %}
 </body>
 </html>
+
