@@ -10,9 +10,9 @@
     <h1>Home Page</h1>
     {% if username %}
         <p>Hello, {{ username }}! You are already logged in.</p>
-        <a href="{{ url_for('logout') }}">Logout</a>  <!-- 🔥 CORRECCIÓN AQUÍ -->
+        <a href="{{ url_for('logout') }}">Logout</a>  
     {% else %}
-        <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
+        <p>You are not logged in. Please <a href="/login">login</a> to access the home page.</p>
     {% endif %}
 </body>
 </html>
