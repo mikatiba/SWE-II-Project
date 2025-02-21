@@ -2,31 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <h2>Login</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
 
-    <main class="form-container">
-        <h1>Login</h1>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+        <input type="submit" value="Login">
+    </form>
 
-        <form method="POST" action="{{ url_for('login') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-
-            <input type="submit" value="Login" class="btn dark">
-        </form>
-
-        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
-    </main>
-
+    <p><a href="{{ url_for('recover') }}">Forgot Password?</a></p>
+    <p><a href="{{ url_for('register') }}">Don't have an account? Register</a></p>
 </body>
 </html>
