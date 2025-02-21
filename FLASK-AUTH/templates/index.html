@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiFacturaPR - Bienvenido</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="{{ url_for('login') }}"><button class="btn">Sign In</button></a>
+                <a href="{{ url_for('register') }}"><button class="btn register">Register</button></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Bienvenido a MiFacturaPR</h1>
+        <p>Administra todas tus facturas en un solo lugar.</p>
+        <div class="buttons">
+            <a href="{{ url_for('login') }}"><button class="btn dark">Login</button></a>
+            <a href="{{ url_for('register') }}"><button class="btn light">Register</button></a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 MiFacturaPR. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
