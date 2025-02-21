@@ -4,16 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Home Page</h1>
 
-    {% if username %}
-        <p>Hello, {{ username }}! You are already logged in.</p>
-        <a href="{{ url_for('logout') }}">Logout</a>
-    {% else %}
-        <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
-    {% endif %}
+    <!--  Navbar -->
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="#">Transactions</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if username %}
+                    <span>Welcome, {{ username }}!</span>
+                    <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><button class="btn">Login</button></a>
+                    <a href="{{ url_for('register') }}"><button class="btn register">Register</button></a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Home Page</h1>
+
+        {% if username %}
+            <p>Hello, {{ username }}! You are already logged in.</p>
+        {% else %}
+            <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
+        {% endif %}
+    </main>
+
+    <!--Footer-->
+    <footer class="footer">
+        <p>© 2025 MiFacturaPR. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 </html>

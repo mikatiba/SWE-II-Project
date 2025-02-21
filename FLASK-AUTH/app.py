@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)  
 app.secret_key = '1234'  
 
-# ✅ MySQL Configuration
+# MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = '701512'  
