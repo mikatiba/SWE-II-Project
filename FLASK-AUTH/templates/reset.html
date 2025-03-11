@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+</head>
+<body>
+    <h2>Reset Your Password</h2>
+    <form method="POST" action="{{ url_for('reset_password', token=token) }}">
+        <label for="new_password">New Password:</label><br>
+        <input type="password" id="new_password" name="new_password" required><br><br>
+
+        <label for="confirm_password">Confirm New Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <input type="submit" value="Reset Password">
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('login') }}">Back to Login</a></p>
+</body>
+</html>
