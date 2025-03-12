@@ -5,7 +5,7 @@ from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 load_dotenv()
 
@@ -106,7 +106,7 @@ def recover():
 
         if user:
             token = str(uuid.uuid4())
-            expiry_time = datetime.utcnow() + timedelta(hours=1)
+            expiry_time = datetime.now(timezone.utc) + timedelta(hours=1)
             reset_link = url_for('reset_password', token=token, _external=True)
 
             cur.execute("UPDATE tbl_users SET reset_token = %s, reset_token_expiry = %s WHERE email = %s", (token, expiry_time, email))
@@ -119,7 +119,8 @@ def recover():
             try:
                 mail.send(msg)
             except Exception as e:
-                return render_template('recover.html', error='Failed to send email. Please try again later.')
+                print(f"Error sending email: {e}")
+                return render_template('recover.html', error=f'Failed to send email: {e}')
 
             return render_template('recover.html', message='Check your email for a password reset link.')
         else:
@@ -141,7 +142,7 @@ def reset_password(token):
         cur.execute("SELECT reset_token_expiry FROM tbl_users WHERE reset_token = %s", (token,))
         expiry = cur.fetchone()
 
-        if not expiry or datetime.utcnow() > expiry[0]:
+        if not expiry or datetime.now(timezone.utc) > expiry[0].replace(tzinfo=timezone.utc):
             return render_template('reset.html', error='Token has expired. Please request a new one.', token=token)
 
         hashed_pwd = generate_password_hash(new_password)
