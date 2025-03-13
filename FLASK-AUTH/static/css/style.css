@@ -87,14 +87,18 @@ h1 {
 
 /* Asegura que el footer esté pegado abajo si el contenido es poco */
 html, body {
-    height: 100%;
+    /* height: 100%; */
     margin: 0;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .main-content {
     flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
+}
+main {
+    height: 90vh;
 }
 
 /* Botones */
