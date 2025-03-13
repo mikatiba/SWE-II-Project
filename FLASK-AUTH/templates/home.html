@@ -19,8 +19,8 @@
                 <li><a href="#">Contact</a></li>
             </ul>
             <div class="auth-buttons">
-                {% if username %}
-                    <span>Welcome, {{ username }}!</span>
+                {% if name %}  <!-- Verificamos si `name` está en la sesión -->
+                    <span>Welcome, {{ name }}!</span>
                     <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a>
                 {% else %}
                     <a href="{{ url_for('login') }}"><button class="btn">Login</button></a>
@@ -34,8 +34,8 @@
     <main class="container">
         <h1>Home Page</h1>
 
-        {% if username %}
-            <p>Hello, {{ username }}! You are already logged in.</p>
+        {% if name %}
+            <p>Hello, {{ name }}! You are already logged in.</p>
         {% else %}
             <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
         {% endif %}
