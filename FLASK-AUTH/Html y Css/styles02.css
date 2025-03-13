@@ -1,0 +1,114 @@
+body {
+    background-color: #0D1B2A;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+
+/* Logo */
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Contenedor */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Facturas */
+.bill {
+    background-color: #1B263B;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Hover en facturas */
+.bill:hover {
+    background-color: rgba(76, 175, 80, 0.2); /* Verde translúcido */
+    transform: translateY(-5px); /* Elevar un poco */
+}
+
+/* Imágenes de las facturas */
+.bill img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+/* Info de la factura */
+.bill-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+
+/* Botón Sign out */
+.signout {
+    background-color: #494949;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.signout:hover {
+    background-color: #232121;
+}
+
+
+/* Botón de pago */
+.pay-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover en botón de pago */
+.pay-button:hover {
+    background-color: #4CAF50; /* Más verde */
+    transform: scale(1.05); /* Hace que crezca un poco */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+

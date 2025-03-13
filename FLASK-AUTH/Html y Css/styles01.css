@@ -1,0 +1,170 @@
+/* Fuente Poppins */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #051020;
+    text-align: center;
+}
+
+/* Navbar */
+header {
+    background-color: #08182E;
+    padding: 15px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.auth-buttons .btn {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.auth-buttons .register {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.auth-buttons .btn:hover {
+    opacity: 0.8;
+}
+
+
+main {
+    background-color: #0B1523;
+    color: rgb(255, 255, 255);
+    padding: 50px 20px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+
+.image-container img {
+    max-width: 78%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Estilos para el footer */
+.footer {
+    background: #222; /* Color oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Asegura que el footer esté pegado abajo si el contenido es poco */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
+}
+
+/* Botones */
+.buttons {
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.light {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+/*  hover en el navbar */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease-in-out;
+}
+
+
+/* hover en el navbar */
+.nav-links a:hover {
+    color: #4CAF50; 
+}
+
+/* hover en los botones */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05); /* Hace que el botón crezca un poco */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*  focus en botones */
+.btn:focus {
+    outline: 3px solid #4CAF50; /* Resalta el botón seleccionado */
+    outline-offset: 2px;
+}
+
+.imagen-lum {
+    display: block;
+    width: 80%; /* Ajusta según sea necesario */
+    max-width: 800px; /* Define un límite de tamaño */
+    height: auto;
+    border-radius: 50%; /* Hace la imagen ovalada */
+    object-fit: cover;
+    margin: 20px auto; /* Centra la imagen */
+    overflow: hidden; /* Asegura que el borde se mantenga */
+}
+

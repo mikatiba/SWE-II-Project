@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Pagos</title>
+    <link rel="stylesheet" href="styles04.css">
+</head>
+<body>
+    <header>
+       
+        <div class="navbar">
+            <a href="Homepage.html" class="home-button">
+                <img src="logo_mifactura.png" alt="Home" class="logo">
+            <div>
+                <a href="Facturas.html">Facturas</a>
+                <a href="Historial.html">Historial</a> 
+                <a href="Cuentas.html">Cuentas</a>
+            </div>
+        <button class="signout">Sign out</button>
+    </header>
+
+    <main>
+        <div class="historial-container">
+            <div class="pago">
+                <img src="luma_logo.png" alt="LUMA">
+                <span class="monto rojo">$ 89.67</span>
+                <span class="estado">Abonado : 21 de Febrero 2025</span>
+            </div>
+            <div class="pago">
+                <img src="water_logo.png" alt="Acueductos">
+                <span class="monto verde">$ 39.37</span>
+                <span class="estado">PAGO : 21 de Febrero 2025</span>
+            </div>
+            <div class="pago">
+                <img src="luma_logo.png" alt="LUMA">
+                <span class="monto verde">$ 109.37</span>
+                <span class="estado">PAGO : 21 de Febrero 2025</span>
+            </div>
+            <div class="pago">
+                <img src="water_logo.png" alt="Acueductos">
+                <span class="monto verde">$ 29.37</span>
+                <span class="estado">PAGO : 21 de Enero 2025</span>
+            </div>
+            <!-- Más pagos generados automáticamente -->
+            <script>
+                let historial = document.querySelector(".historial-container");
+                for (let i = 0; i < 15; i++) {
+                    let pago = document.createElement("div");
+                    pago.classList.add("pago");
+                    let img = document.createElement("img");
+                    img.src = i % 2 === 0 ? "luma_logo.png" : "water_logo.png";
+                    let monto = document.createElement("span");
+                    monto.classList.add("monto", i % 2 === 0 ? "rojo" : "verde");
+                    monto.innerText = i % 2 === 0 ? "$ 125.00" : "$ 45.25";
+                    let estado = document.createElement("span");
+                    estado.classList.add("estado");
+                    estado.innerText = "PAGO : 15 de Marzo 2025";
+                    pago.appendChild(img);
+                    pago.appendChild(monto);
+                    pago.appendChild(estado);
+                    historial.appendChild(pago);
+                }
+            </script>
+        </div>
+    </main>
+</body>
+</html>

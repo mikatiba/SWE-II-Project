@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0b1e30;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+
+/* Logo */
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Contenedor */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+.signout {
+    background-color: #494949;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.signout:hover {
+    background-color: #232121;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.historial-container {
+    width: 100%;
+    max-width: 900px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.pago {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #12263f;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.pago img {
+    width: 70px;
+    height: 70px;
+}
+
+.monto {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.rojo {
+    color: red;
+}
+
+.verde {
+    color: limegreen;
+}
+
+.estado {
+    font-size: 16px;
+}
+/* Para navegadores basados en WebKit (Chrome, Edge, Safari) */
+.historial-container::-webkit-scrollbar {
+    width: 0px; /* Hace invisible la barra de scroll */
+    height: 0px;
+}
+
+/* Para Firefox */
+.historial-container {
+    scrollbar-width: none; /* Oculta la barra de scroll */
+}
+
+/* Para Internet Explorer y Edge */
+.historial-container {
+    -ms-overflow-style: none; /* Oculta la barra de scroll */
+}

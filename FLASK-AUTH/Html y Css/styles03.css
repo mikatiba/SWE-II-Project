@@ -1,0 +1,139 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo y tipografía general */
+body {
+    background-color: #0c1b2c;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+
+/* Logo */
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Contenedor */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Botón Sign out */
+.signout {
+    background-color: #494949;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.signout:hover {
+    background-color: #232121;
+}
+
+/* 💡 Sección principal */
+main {
+    padding: 40px;
+}
+
+/* Servicios */
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+/* Tarjetas de servicios */
+.service {
+    background-color: #12263a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.service img {
+    width: 320px;
+    height: 320px;
+}
+
+/* Botones */
+.buttons {
+    margin-top: 10px;
+}
+
+.vincular {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.desvincular {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.vincular, .desvincular {
+    font-size: 25px;  /* Texto más grande */
+    padding: 20 px 30 px;  /* Más espacio en los botones */
+    border-radius: 20px;
+}
+
+
+.vincular:hover {
+    background-color: #0056b3;
+}
+
+.desvincular:hover {
+    background-color: #a71d2a;
+}
+
+nav ul li a.active {
+    background-color: gray;
+    border-radius: 5px;
+}
+

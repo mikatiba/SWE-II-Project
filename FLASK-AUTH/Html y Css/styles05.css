@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0B162C;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+
+
+/* Logo */
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+h1 {
+    margin-bottom: 60px; /* Ajusta el valor según la separación que desees */
+}
+
+h1 {
+    margin-top: 20px ;
+}
+
+.factura-container {
+    background: white;
+    color: black;
+    border-radius: 15px;
+    padding: 100px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.logoluma {
+    background: #6BA544;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: -30px;
+}
+
+.monto {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.metodos-pago img {
+    width: 40px;
+    margin: 10px;
+}
+
+.btn-pagar {
+    background: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+   margin-top: 30px;
+}
+
+.factura-container :hover {
+
+    background-color: #4CAF50;
+}
+
+
+.signout {
+    background-color: #494949;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.signout:hover {
+    background-color: #232121;
+}
+
+/* Asegurar que los métodos de pago no se vean afectados */
+.metodos-pago .btn-metodo:hover {
+    background-color: white; /* Mantiene el fondo original */
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
