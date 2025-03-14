@@ -137,3 +137,23 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
+/* Estilos para el footer */
+.footer {
+    background: #222; /* Color oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Estilo especial para el enlace activo */
+.activocuentas {
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}

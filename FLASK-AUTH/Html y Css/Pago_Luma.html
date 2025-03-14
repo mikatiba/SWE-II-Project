@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Facturas</title>
     <link rel="stylesheet" href="styles05.css">
+    <script src="script05.js" defer></script>
+
 </head>
 <body>
 
@@ -34,15 +36,53 @@
         <p class="monto">$ 89.67</p>
         
         <div class="metodos-pago">
-            <button class="btn-metodo"><img src="visa.png" alt="Visa"></button>
-            <button class="btn-metodo"><img src="paypal.png" alt="PayPal"></button>
-            <button class="btn-metodo"><img src="mastercard.png" alt="MasterCard"></button>
-            <button class="btn-metodo"><img src="discover.png" alt="Discover"></button>
-            <button class="btn-metodo"><img src="ach.png" alt="ACH"></button>
+            <button class="btn-metodo" onclick="mostrarFormulario('Visa')">
+                <img src="visa.png" alt="Visa">
+            </button>
+            <button class="btn-metodo" onclick="mostrarFormulario('PayPal')">
+                <img src="paypal.png" alt="PayPal">
+            </button>
+            <button class="btn-metodo" onclick="mostrarFormulario('MasterCard')">
+                <img src="mastercard.png" alt="MasterCard">
+            </button>
+            <button class="btn-metodo" onclick="mostrarFormulario('Discover')">
+                <img src="discover.png" alt="Discover">
+            </button>
+            <button class="btn-metodo" onclick="mostrarFormulario('ACH')">
+                <img src="ach.png" alt="ACH">
+            </button>
         </div>
+        
         
         <button class="btn-pagar">PAGAR</button>
     </div>
     
+   
+
+    <div id="overlay" class="overlay"></div>
+    <div id="mensaje-confirmacion" class="hidden mensaje-confirmacion"></div>
+    <div id="paypal-button-container"></div>
+
+    <div id="formulario-pago" class="hidden">
+        <h2 id="titulo-formulario"></h2>
+        <form id="payment-form">
+            <label for="card-number">Número de Tarjeta:</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+    
+            <label for="expiry-date">Fecha de Expiración:</label>
+            <input type="text" id="expiry-date" placeholder="MM/AA" required>
+    
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="123" required>
+    
+            <!-- Mensaje de confirmación -->
+            <div id="mensaje-confirmacion" class="hidden mensaje-confirmacion"></div>
+    
+            <button type="submit" class="btn-guardar">Guardar Método de Pago</button>
+        </form>
+    </div>
+    
+    
+
 </body>
 </html>

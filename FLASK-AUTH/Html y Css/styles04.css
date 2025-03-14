@@ -128,3 +128,12 @@ main {
 .historial-container {
     -ms-overflow-style: none; /* Oculta la barra de scroll */
 }
+
+/* Estilo especial para el enlace activo */
+.activohistorial {
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}

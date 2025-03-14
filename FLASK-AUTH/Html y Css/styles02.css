@@ -109,6 +109,26 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Estilos para el footer */
+.footer {
+    background: #222; /* Color oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
 
+
+/* Estilo especial para el enlace activo */
+.activofactura {
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
 
 
