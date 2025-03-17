@@ -4,44 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de Pagos</title>
-    <link rel="stylesheet" href="styles04.css">
-    <link rel="icon" type="image/png" href="logo_mifactura.png"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles04.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
 </head>
 <body>
     <header>
-       
         <div class="navbar">
-            <a href="Homepage.html" class="home-button">
-                <img src="logo_mifactura.png" alt="Home" class="logo">
-
-                <div>
-                    <a href="Facturas.html" >Facturas</a>
-                    <a href="Historial.html"class="activohistorial">Historial</a> 
-                    <a href="Cuentas.html">Cuentas</a>
-                </div>
-                
-        <button class="signout">Sign out</button>
+            <a href="{{ url_for('home') }}" class="home-button">
+                <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
+            </a>
+            <div>
+                <a href="{{ url_for('facturas') }}">Facturas</a>
+                <a href="{{ url_for('historial') }}" class="activohistorial">Historial</a> 
+                <a href="{{ url_for('cuentas') }}">Cuentas</a>
+            </div>
+            <button class="signout">Sign out</button>
+        </div>
     </header>
 
     <main>
         <div class="historial-container">
             <div class="pago">
-                <img src="luma_logo.png" alt="LUMA">
+                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
                 <span class="monto rojo">$ 89.67</span>
                 <span class="estado">Abonado : 21 de Febrero 2025</span>
             </div>
             <div class="pago">
-                <img src="water_logo.png" alt="Acueductos">
+                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="Acueductos">
                 <span class="monto verde">$ 39.37</span>
                 <span class="estado">PAGO : 21 de Febrero 2025</span>
             </div>
             <div class="pago">
-                <img src="luma_logo.png" alt="LUMA">
+                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
                 <span class="monto verde">$ 109.37</span>
                 <span class="estado">PAGO : 21 de Febrero 2025</span>
             </div>
             <div class="pago">
-                <img src="water_logo.png" alt="Acueductos">
+                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="Acueductos">
                 <span class="monto verde">$ 29.37</span>
                 <span class="estado">PAGO : 21 de Enero 2025</span>
             </div>
@@ -52,7 +51,7 @@
                     let pago = document.createElement("div");
                     pago.classList.add("pago");
                     let img = document.createElement("img");
-                    img.src = i % 2 === 0 ? "luma_logo.png" : "water_logo.png";
+                    img.src = i % 2 === 0 ? "{{ url_for('static', filename='images/luma_logo.png') }}" : "{{ url_for('static', filename='images/water_logo.png') }}";
                     let monto = document.createElement("span");
                     monto.classList.add("monto", i % 2 === 0 ? "rojo" : "verde");
                     monto.innerText = i % 2 === 0 ? "$ 125.00" : "$ 45.25";

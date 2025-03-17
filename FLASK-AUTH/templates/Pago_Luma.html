@@ -4,32 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Facturas</title>
-    <link rel="stylesheet" href="styles05.css">
-    <script src="script05.js" defer></script>
-    <link rel="icon" type="image/png" href="logo_mifactura.png"> 
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles05.css') }}">
+    <script src="{{ url_for('static', filename='js/script05.js') }}" defer></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
 </head>
 <body>
-
-    
     <div class="navbar">
-        <a href="Homepage.html" class="home-button">
-            <img src="logo_mifactura.png" alt="Home" class="logo">
-        <div>
-            <a href="Facturas.html"> Facturas</a>
-            <a href="Historial.html">Historial</a> 
-            <a href="Cuentas.html">Cuentas</a>
-        </div>
-       
+        <a href="{{ url_for('home') }}" class="home-button">
+            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
         </a>
+        <div>
+            <a href="{{ url_for('facturas') }}"> Facturas</a>
+            <a href="{{ url_for('historial') }}">Historial</a> 
+            <a href="{{ url_for('cuentas') }}">Cuentas</a>
+        </div>
         <button class="signout">Sign out</button>
     </div>
- <p></p>
-
+ 
     <h1 class="mt-4">Mis Facturas</h1>
     
     <div class="logoluma">
-        <img src="luma_logo.png" alt="LUMA" width="60">
+        <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA" width="60">
     </div>
     
     <div class="factura-container mt-3">
@@ -38,28 +33,25 @@
         
         <div class="metodos-pago">
             <button class="btn-metodo" onclick="mostrarFormulario('Visa')">
-                <img src="visa.png" alt="Visa">
+                <img src="{{ url_for('static', filename='images/visa.png') }}" alt="Visa">
             </button>
             <button class="btn-metodo" onclick="mostrarFormulario('PayPal')">
-                <img src="paypal.png" alt="PayPal">
+                <img src="{{ url_for('static', filename='images/paypal.png') }}" alt="PayPal">
             </button>
             <button class="btn-metodo" onclick="mostrarFormulario('MasterCard')">
-                <img src="mastercard.png" alt="MasterCard">
+                <img src="{{ url_for('static', filename='images/mastercard.png') }}" alt="MasterCard">
             </button>
             <button class="btn-metodo" onclick="mostrarFormulario('Discover')">
-                <img src="discover.png" alt="Discover">
+                <img src="{{ url_for('static', filename='images/discover.png') }}" alt="Discover">
             </button>
             <button class="btn-metodo" onclick="mostrarFormulario('ACH')">
-                <img src="ach.png" alt="ACH">
+                <img src="{{ url_for('static', filename='images/ach.png') }}" alt="ACH">
             </button>
         </div>
-        
         
         <button class="btn-pagar">PAGAR</button>
     </div>
     
-   
-
     <div id="overlay" class="overlay"></div>
     <div id="mensaje-confirmacion" class="hidden mensaje-confirmacion"></div>
     <div id="paypal-button-container"></div>
@@ -76,14 +68,10 @@
             <label for="cvv">CVV:</label>
             <input type="text" id="cvv" placeholder="123" required>
     
-            <!-- Mensaje de confirmación -->
             <div id="mensaje-confirmacion" class="hidden mensaje-confirmacion"></div>
     
             <button type="submit" class="btn-guardar">Guardar Método de Pago</button>
         </form>
     </div>
-    
-    
-
 </body>
 </html>

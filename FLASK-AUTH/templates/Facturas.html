@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Facturas</title>
-    <link rel="stylesheet" href="styles02.css">
-    <link rel="icon" type="image/png" href="logo_mifactura.png"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles02.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
 </head>
 <body>
     <div class="navbar">
-        <a href="Homepage.html" class="home-button">
-            <img src="logo_mifactura.png" alt="Home" class="logo">
-
-            <div>
-                <a href="Facturas.html" class="activofactura">Facturas</a>
-                <a href="Historial.html">Historial</a> 
-                <a href="Cuentas.html">Cuentas</a>
-            </div>
-       
+        <a href="{{ url_for('home') }}" class="home-button">
+            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
         </a>
+        <div>
+            <a href="{{ url_for('facturas') }}" class="activofactura">Facturas</a>
+            <a href="{{ url_for('historial') }}">Historial</a> 
+            <a href="{{ url_for('cuentas') }}">Cuentas</a>
+        </div>
         <button class="signout">Sign out</button>
     </div>
     
@@ -26,11 +24,11 @@
         <h2>Mis Facturas</h2>
         
         <div class="bill">
-            <img src="luma_logo.png" alt="LUMA">
+            <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
             <div class="bill-info">
                 <h3>Balance actual</h3>
                 <p>$89.67</p>
-                <a href="Pago_Luma.html">
+                <a href="{{ url_for('pago_luma') }}">
                     <button class="pay-button">PAGAR</button>
                 </a>
                 
@@ -39,7 +37,7 @@
         </div>
         
         <div class="bill">
-            <img src="water_logo.png" alt="AAA">
+            <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
             <div class="bill-info">
                 <h3>Balance actual</h3>
                 <p>$39.37</p>

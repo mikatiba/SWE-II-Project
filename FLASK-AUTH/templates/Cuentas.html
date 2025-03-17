@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles03.css"> 
-    <link rel="icon" type="image/png" href="logo_mifactura.png"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles03.css') }}"> 
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
 </head>
 <body>
     <header>
         <div class="navbar">
-            <a href="Homepage.html" class="home-button">
-                <img src="logo_mifactura.png" alt="Home" class="logo">
-                <div>
-                    <a href="Facturas.html" >Facturas</a>
-                    <a href="Historial.html">Historial</a> 
-                    <a href="Cuentas.html"class="activocuentas">Cuentas</a>
-                </div>
-        <button class="signout">Sign out</button>
+            <a href="{{ url_for('home') }}" class="home-button">
+                <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
+            </a>
+            <div>
+                <a href="{{ url_for('facturas') }}">Facturas</a>
+                <a href="{{ url_for('historial') }}">Historial</a> 
+                <a href="{{ url_for('cuentas') }}" class="activocuentas">Cuentas</a>
+            </div>
+            <button class="signout">Sign out</button>
+        </div>
     </header>
 
     <main>
         <h1>Bienvenido (User)!</h1>
         <div class="services">
             <div class="service">
-                <img src="luma_logo.png" alt="LUMA">
+                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
                 <div class="buttons">
                     <button class="vincular">Vincular</button>
                     <button class="desvincular">Desvincular</button>
@@ -32,7 +34,7 @@
             </div>
 
             <div class="service">
-                <img src="water_logo.png" alt="AAA">
+                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
                 <div class="buttons">
                     <button class="vincular">Vincular</button>
                     <button class="desvincular">Desvincular</button>
