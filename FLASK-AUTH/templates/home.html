@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>MiFacturaPR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
 </head>
 <body>
-
-    <!--  Navbar -->
+    <!-- Navbar -->
     <header>
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">Transactions</a></li>
-                <li><a href="#">Appointments</a></li>
-                <li><a href="#">Resources</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{{ url_for('facturas') }}">Mis Facturas</a></li>
+                <li><a href="{{ url_for('cuentas') }}">Cuentas</a></li>
+                <li><a href="{{ url_for('historial') }}">Historial</a></li>
+                <li><a href="#">Contactos</a></li>
             </ul>
             <div class="auth-buttons">
-                {% if name %}  <!-- Verificamos si `name` está en la sesión -->
+                {% if name %}
                     <span>Welcome, {{ name }}!</span>
                     <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a>
                 {% else %}
@@ -32,19 +33,24 @@
 
     <!-- Main Content -->
     <main class="container">
-        <h1>Home Page</h1>
-
+        <h1>MiFacturaPR</h1>
         {% if name %}
             <p>Hello, {{ name }}! You are already logged in.</p>
         {% else %}
             <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
         {% endif %}
+        
+        <div class="buttons">
+            <a href="{{ url_for('register') }}"><button class="btn dark">Register</button></a>
+            <a href="{{ url_for('login') }}"><button class="btn light">Sign In</button></a>
+        </div>
+
+        <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Persona de espalda con casco de construcción observando cómo arreglan un poste" class="imagen-lum">
     </main>
 
-    <!--Footer-->
+    <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 MiFacturaPR. Todos los derechos reservados.</p>
+        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
     </footer>
-
 </body>
 </html>
