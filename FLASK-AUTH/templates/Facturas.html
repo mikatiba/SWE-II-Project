@@ -2,50 +2,68 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Facturas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles02.css') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
+    <link rel="icon" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
+    <script defer src="{{ url_for('static', filename='js/script05.js') }}"></script>
 </head>
 <body>
     <div class="navbar">
         <a href="{{ url_for('home') }}" class="home-button">
-            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
+            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Logo" class="logo">
         </a>
         <div>
             <a href="{{ url_for('facturas') }}" class="activofactura">Facturas</a>
-            <a href="{{ url_for('historial') }}">Historial</a> 
+            <a href="{{ url_for('historial') }}">Historial</a>
             <a href="{{ url_for('cuentas') }}">Cuentas</a>
         </div>
-        <button class="signout">Sign out</button>
+        <a href="{{ url_for('logout') }}"><button class="signout">Sign out</button></a>
     </div>
-    
+
     <div class="container">
         <h2>Mis Facturas</h2>
-        
+
+        {% for factura in facturas %}
         <div class="bill">
-            <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
+            {% if factura[3] == 'LUMA' %}
+                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
+            {% elif factura[3] == 'AAA' %}
+                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
+            {% else %}
+                <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
+            {% endif %}
             <div class="bill-info">
-                <h3>Balance actual</h3>
-                <p>$89.67</p>
-                <a href="{{ url_for('pago_luma') }}">
-                    <button class="pay-button">PAGAR</button>
-                </a>
-                
-                <p>Vence en: 20 de Marzo del 2025</p>
+                <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
+                <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
+                <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
+                <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
             </div>
         </div>
-        
-        <div class="bill">
-            <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
-            <div class="bill-info">
-                <h3>Balance actual</h3>
-                <p>$39.37</p>
-                <button class="pay-button">PAGAR</button>
-                <p>Vence en: 20 de Marzo del 2025</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
+
+    <!-- Overlay y Formulario -->
+    <div id="overlay" class="hidden"></div>
+
+    <div id="formulario-pago" class="hidden">
+        <h2>Ingrese los números de la tarjeta</h2>
+        <form id="payment-form" method="POST" action="{{ url_for('procesar_pago') }}">
+            <input type="hidden" id="servicio" name="servicio">
+            <input type="hidden" id="payment-amount" name="amount">
+
+            <label for="card-number">Número de Tarjeta:</label>
+            <input type="text" id="card-number" name="card_number" required>
+
+            <label for="expiry-date">Fecha de Expiración:</label>
+            <input type="text" id="expiry-date" name="expiry_date" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+
+            <button type="submit" class="btn-pagar">Efectuar Pago</button>
+        </form>
+    </div>
+
     <footer class="footer">
         <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
     </footer>

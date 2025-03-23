@@ -1,40 +1,35 @@
-function mostrarFormulario(metodo) {
+document.addEventListener("DOMContentLoaded", function () {
+    const botones = document.querySelectorAll(".pay-button");
     const formulario = document.getElementById("formulario-pago");
-    const titulo = document.getElementById("titulo-formulario");
     const overlay = document.getElementById("overlay");
+    const inputMonto = document.getElementById("payment-amount");
+    const inputServicio = document.getElementById("servicio");
 
-    if (metodo === "PayPal" || metodo === "ACH") {
-        window.location.href = metodo.toLowerCase() + ".html"; // Redirige a otra página
-    } else {
-        formulario.classList.remove("hidden");
-        overlay.classList.add("active");
-        titulo.innerText = "Ingrese los datos de " + metodo;
-    }
-}
+    botones.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const metodo = btn.getAttribute("data-metodo");
+            const monto = btn.getAttribute("data-amount");
 
-// Cerrar el formulario al hacer clic fuera 
-document.getElementById("overlay").addEventListener("click", function () {
-    document.getElementById("formulario-pago").classList.add("hidden");
-    document.getElementById("overlay").classList.remove("active");
-});
+            // Mostrar el formulario
+            formulario.classList.remove("hidden");
+            overlay.classList.remove("hidden");
+            formulario.classList.add("active");
+            overlay.classList.add("active");
 
-// Manejar el envío del formulario
-document.getElementById("payment-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita recargar la página
-    
-    // Obtener el div donde aparecerá el mensaje
-    let mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+            inputMonto.value = monto;
+            inputServicio.value = metodo;
 
-    // Mostrar mensaje dentro del formulario
-    mensajeConfirmacion.textContent = "Método de pago guardado correctamente.";
-    mensajeConfirmacion.style.display = "block";
+            console.log("Formulario mostrado para:", metodo);
+        });
+    });
 
-    // Ocultar el mensaje después de 3 segundos (opcional)
-    setTimeout(() => {
-        mensajeConfirmacion.style.display = "none";
-    }, 3000);
+    overlay.addEventListener("click", () => {
+        formulario.classList.remove("active");
+        overlay.classList.remove("active");
+        formulario.classList.add("hidden");
+        overlay.classList.add("hidden");
+    });
 
-    // Ocultar el formulario
-    document.getElementById("formulario-pago").classList.add("hidden");
-    document.getElementById("overlay").classList.remove("active");
+    // NO usar preventDefault para que se envíe al backend
+    // El backend procesará el pago y redirigirá al historial
 });

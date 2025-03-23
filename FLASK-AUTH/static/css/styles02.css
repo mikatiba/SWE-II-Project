@@ -1,3 +1,4 @@
+/* General */
 body {
     background-color: #0D1B2A;
     color: white;
@@ -13,6 +14,7 @@ body {
     align-items: center;
     background-color: #161B22;
     padding: 22px 20px;
+    flex-wrap: wrap;
 }
 
 .navbar a {
@@ -23,18 +25,15 @@ body {
 }
 
 .navbar a:hover {
-    color: #4CAF50; /* Verde al pasar el mouse */
+    color: #4CAF50;
 }
 
 /* Logo */
-.logo {  
+.logo {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    position: absolute;
-    top: 10px;
-    left: 10px;
 }
 
 /* Contenedor */
@@ -56,25 +55,21 @@ body {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Hover en facturas */
 .bill:hover {
-    background-color: rgba(76, 175, 80, 0.2); /* Verde translúcido */
-    transform: translateY(-5px); /* Elevar un poco */
+    background-color: rgba(76, 175, 80, 0.2);
+    transform: translateY(-5px);
 }
 
-/* Imágenes de las facturas */
 .bill img {
     width: 80px;
     height: 80px;
     border-radius: 8px;
 }
 
-/* Info de la factura */
 .bill-info {
     flex: 1;
     margin-left: 20px;
 }
-
 
 /* Botón Sign out */
 .signout {
@@ -90,7 +85,6 @@ body {
     background-color: #232121;
 }
 
-
 /* Botón de pago */
 .pay-button {
     background-color: #28a745;
@@ -102,16 +96,15 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover en botón de pago */
 .pay-button:hover {
-    background-color: #4CAF50; /* Más verde */
-    transform: scale(1.05); /* Hace que crezca un poco */
+    background-color: #4CAF50;
+    transform: scale(1.05);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para el footer */
+/* Footer */
 .footer {
-    background: #222; /* Color oscuro */
+    background: #222;
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -121,8 +114,7 @@ body {
     bottom: 0;
 }
 
-
-/* Estilo especial para el enlace activo */
+/* Activo */
 .activofactura {
     color: white;
     background-color: #4CAF50;
@@ -131,4 +123,82 @@ body {
     border-radius: 5px;
 }
 
+/* === MODAL DE PAGO === */
+.hidden {
+    display: none !important;
+}
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 999;
+    display: none;
+}
+
+#formulario-pago {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8f8f8;
+    color: #1c1c1c;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    width: 350px;
+    max-width: 90%;
+    z-index: 1000;
+    display: none;
+}
+
+#formulario-pago.active,
+#overlay.active {
+    display: block !important;
+}
+
+#formulario-pago h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #222;
+}
+
+#formulario-pago label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+#formulario-pago input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+#formulario-pago input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.btn-pagar {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-pagar:hover {
+    background-color: #3fa543;
+}

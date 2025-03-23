@@ -21,7 +21,7 @@
             </ul>
             <div class="auth-buttons">
                 {% if name %}
-                    <span>Welcome, {{ name }}!</span>
+                    <span>Bienvenido, {{ name }}!</span>
                     <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a>
                 {% else %}
                     <a href="{{ url_for('login') }}"><button class="btn">Login</button></a>
@@ -34,18 +34,18 @@
     <!-- Main Content -->
     <main class="container">
         <h1>MiFacturaPR</h1>
-        {% if name %}
-            <p>Hello, {{ name }}! You are already logged in.</p>
-        {% else %}
-            <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to access the home page.</p>
-        {% endif %}
-        
-        <div class="buttons">
-            <a href="{{ url_for('register') }}"><button class="btn dark">Register</button></a>
-            <a href="{{ url_for('login') }}"><button class="btn light">Sign In</button></a>
-        </div>
 
-        <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Persona de espalda con casco de construcción observando cómo arreglan un poste" class="imagen-lum">
+        {% if not name %}
+            <p>Bienvenido a nuestra plataforma. Por favor inicia sesión para ver tus facturas.</p>
+            <div class="buttons">
+                <a href="{{ url_for('register') }}"><button class="btn dark">Registrarse</button></a>
+                <a href="{{ url_for('login') }}"><button class="btn light">Iniciar Sesión</button></a>
+            </div>
+        {% else %}
+            <p>Desde aquí puedes acceder a todas tus facturas y pagos.</p>
+        {% endif %}
+
+        <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Trabajador arreglando poste" class="imagen-lum">
     </main>
 
     <!-- Footer -->
