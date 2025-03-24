@@ -1,4 +1,6 @@
 import os
+import random
+import string
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
@@ -24,7 +26,34 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+
+        cur = mysql.connection.cursor()
+
+        cur.execute("""
+            INSERT INTO users (username, name, email, password)
+            VALUES (%s, %s, %s, %s)
+        """, (username, name, email, password))
+        mysql.connection.commit()
+
+        cur.execute("SELECT id_user FROM users WHERE username = %s", (username,))
+        user = cur.fetchone()
+
+        if user:
+            id_user = user[0]
+            numero_cuenta = ''.join(random.choices(string.digits, k=10))
+            cur.execute("""
+                INSERT INTO Account (account_number, id_user)
+                VALUES (%s, %s)
+            """, (numero_cuenta, id_user))
+            mysql.connection.commit()
+
+        cur.close()
         return redirect(url_for('login'))
+
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -64,7 +93,18 @@ def home():
 def cuentas():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template('cuentas.html')
+
+    id_user = session['id_user']
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        SELECT account_number
+        FROM Account
+        WHERE id_user = %s
+    """, (id_user,))
+    cuentas = [row[0] for row in cur.fetchall()]
+    cur.close()
+
+    return render_template('cuentas.html', name=session['username'], cuentas=cuentas)
 
 @app.route('/facturas')
 def facturas():
@@ -82,7 +122,6 @@ def facturas():
 
     id_user, name = user
 
-    # ✅ Mostrar solo facturas NO pagadas
     cur.execute("""
         SELECT B.id_bill, B.total_amount, B.expiring_date, S.service_name, S.provider
         FROM Bill B
@@ -103,7 +142,6 @@ def procesar_pago():
     id_user = session.get('id_user')
     numero_tarjeta = request.form['card_number']
     fecha_expiracion = request.form['expiry_date']
-    cvv = request.form['cvv']
     monto = float(request.form['amount'])
     servicio = request.form.get('servicio', 'LUMA')
 
@@ -157,6 +195,28 @@ def historial():
     cur.close()
 
     return render_template('historial.html', historial=historial)
+
+@app.route('/ver_facturas_cuenta', methods=['POST'])
+def ver_facturas_cuenta():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    numero_cuenta = request.form.get('numero_cuenta')
+    id_user = session.get('id_user')
+
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        SELECT B.id_bill, B.total_amount, B.expiring_date, S.service_name, S.provider
+        FROM Bill B
+        JOIN Service S ON B.id_service = S.id_service
+        WHERE B.id_user = %s AND B.account_number = %s
+        ORDER BY B.expiring_date ASC
+    """, (id_user, numero_cuenta))
+
+    facturas = cur.fetchall()
+    cur.close()
+
+    return render_template('facturas.html', name=session['username'], facturas=facturas)
 
 if __name__ == '__main__':
     app.run(debug=True)
