@@ -5,19 +5,35 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 from datetime import datetime
+from flask_mail import Message, Mail
+from itsdangerous import URLSafeTimedSerializer
 
 load_dotenv()
 
+# Configuración de la aplicación
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default_secret')
 
+# Configuración de MySQL
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT', 3306))
 
+# Configuración de Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+mail = Mail(app)
+
 mysql = MySQL(app)
+
+# Inicializar el generador de tokens
+s = URLSafeTimedSerializer(os.getenv('FLASK_SECRET_KEY'))
 
 @app.route('/')
 def index():
@@ -52,7 +68,12 @@ def register():
             mysql.connection.commit()
 
         cur.close()
-        return redirect(url_for('login'))
+
+        # Iniciar sesión inmediatamente después de registrarse
+        session['username'] = username
+        session['id_user'] = id_user
+
+        return redirect(url_for('facturas'))
 
     return render_template('register.html')
 
@@ -79,9 +100,54 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/recover')
+@app.route('/recover', methods=['GET', 'POST'])
 def recover():
+    if request.method == 'POST':
+        email = request.form['email']
+
+        # Verificar si el correo existe
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_user FROM users WHERE email = %s", (email,))
+        user = cur.fetchone()
+
+        if user:
+            # Crear token de recuperación
+            token = s.dumps(email, salt='recover-password')
+
+            # Crear enlace de recuperación
+            reset_link = url_for('reset_password', token=token, _external=True)
+
+            # Enviar correo con el enlace
+            msg = Message("Password Reset Request", sender="mifacturapr@gmail.com", recipients=[email])
+            msg.body = f"Please click the following link to reset your password: {reset_link}"
+            mail.send(msg)
+
+            return render_template('recover.html', message="A password reset link has been sent to your email.")
+
+        else:
+            return render_template('recover.html', error="Email not found!")
+
     return render_template('recover.html')
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        # Verificar el token
+        email = s.loads(token, salt='recover-password', max_age=3600)  # El token expira en 1 hora
+    except Exception as e:
+        return "The link has expired or is invalid."
+
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+
+        # Actualizar la contraseña del usuario
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE users SET password = %s WHERE email = %s", (new_password, email))
+        mysql.connection.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('reset_password.html', token=token)
 
 @app.route('/home')
 def home():
