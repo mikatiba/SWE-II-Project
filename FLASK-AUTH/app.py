@@ -149,6 +149,31 @@ def reset_password(token):
 
     return render_template('reset_password.html', token=token)
 
+@app.route('/recover_username', methods=['GET', 'POST'])
+def recover_username():
+    if request.method == 'POST':
+        email = request.form['email']
+
+        # Verificar si el correo existe en la base de datos
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT username FROM users WHERE email = %s", (email,))
+        user = cur.fetchone()
+
+        if user:
+            username = user[0]
+            
+            # Enviar el nombre de usuario al correo del usuario
+            msg = Message("Username Recovery", sender="mifacturapr@gmail.com", recipients=[email])
+            msg.body = f"Your username is: {username}"
+            mail.send(msg)
+
+            return render_template('recover_username.html', message="Your username has been sent to your email.")
+
+        else:
+            return render_template('recover_username.html', error="Email not found!")
+
+    return render_template('recover_username.html')
+
 @app.route('/home')
 def home():
     if 'username' in session:

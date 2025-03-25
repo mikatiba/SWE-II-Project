@@ -23,7 +23,7 @@
         {% if error %}
             <p class="error-message">{{ error }}</p>
         {% endif %}
-
+        <p>><a href="{{ url_for('recover_username') }}">Forgot your username?</a></p>
         <p><a href="{{ url_for('recover') }}">Forgot Password?</a></p>
         <p><a href="{{ url_for('register') }}">Don't have an account? Register</a></p>
     </div>
