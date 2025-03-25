@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,4 +33,55 @@
 
     <p><a href="{{ url_for('login') }}">Already have an account? Login</a></p>
 </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles06.css">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    </head>    
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="logo_mifactura.png" alt="Logo" class="logo">
+            <h2>Register</h2>
+            <form action="#" method="POST">
+                <label for="fullname">Nombre Completo</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Nombre Completo" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+
+                <label for="confirm_password">Confirmar Contraseña</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmar Contraseña" required>
+
+               
+                    <div class="social-login">
+                        <span>Log in con:</span>
+                        <div class="icons">
+                            <button type="button" class="social-btn facebook"><i class="fa-brands fa-facebook fa-sm" style="color: #fafafa;"></i></button>
+                            <button type="button" class="social-btn google"><i class="fa-brands fa-google"></i></button>
+                            <button type="button" class="social-btn microsoft"><i class="fa-brands fa-microsoft"></i></button>
+                        </div>
+                    </div>
+                    
+
+
+                <button type="submit" class="login-btn">Registrar</button>
+            </form>
+
+            <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+</body>
 </html>
+
