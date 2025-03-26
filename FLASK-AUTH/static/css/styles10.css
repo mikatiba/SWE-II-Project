@@ -1,0 +1,102 @@
+/* Estilos generales */
+body {
+    background-color: #0A1128; /* Fondo oscuro */
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.reset-container {
+    background-color: #1A1A1A; /* Fondo oscuro para el formulario */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 400px;
+}
+
+/* Imagen del logo */
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* Título */
+h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Etiqueta del campo */
+label {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+
+/* Campo de entrada */
+input[type="password"] {
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Botón de envío */
+input[type="submit"] {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Mensajes de éxito y error */
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}
+
+/* Enlace para regresar */
+.back-link {
+    margin-top: 15px;
+}
+
+.back-link a {
+    color: #1E88E5;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
