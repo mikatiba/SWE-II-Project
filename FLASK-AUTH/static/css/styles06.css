@@ -1,0 +1,150 @@
+body {
+    background-color: #0A1128;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-box {
+    background-color: #1A1A1A;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 82px;
+    height: 82px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-bottom: 22px;
+}
+
+
+h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: white;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.social-login {
+    margin: 10px 0;
+    color: white;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.social-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.login-btn {
+    background-color: green ;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.login-btn:hover {
+    background-color: #4CAF50;
+}
+
+.login-link {
+    color: white;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #1E88E5;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/*FONT AWESOME google pagina de iconos*/ 
+.social-btn {
+    background-color: #0A1128;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facebook {
+    background-color: #0A1128;
+}
+
+.google {
+    background-color: #0A1128;
+}
+
+.microsoft {
+    background-color: #0A1128;
+}
+
+.social-btn:hover {
+    opacity: 0.2;
+    size-adjust: 0.3;
+}

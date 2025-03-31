@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,5 +21,33 @@
     {% endif %}
 
     <p><a href="{{ url_for('login') }}">Back to Login</a></p>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles09.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
+</head>
+<body>
+    <div class="recovery-container">
+        <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Logo" class="logo">
+        <h2>Recuperar Usuario</h2>
+        <form method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="Email" placeholder="Email" required>
+            <input type="submit" value="Aceptar">
+        </form>
+
+        <!-- {% if message %}
+            <p class="success-message">{{ message }}</p>
+        {% elif error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %} -->
+
+        <p class="back-link"><a href="{{ url_for('login') }}">Volver a Login</a></p>
+    </div>
 </body>
 </html>
