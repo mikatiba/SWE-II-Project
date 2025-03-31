@@ -35,21 +35,10 @@ SWE-II-Project/
 - Python 3.x
 - Flask
 
-Puedes instalar Flask usando pip:
-
-```bash
-pip install flask
-```
-
 ## Cómo ejecutar el proyecto
 
 1. Navega a la carpeta `FLASK-AUTH/`.
 2. Ejecuta el archivo `app.py`:
-
-```bash
-python app.py
-```
-
 3. Abre tu navegador en `http://localhost:5000`.
 
 ## Integrantes del equipo
