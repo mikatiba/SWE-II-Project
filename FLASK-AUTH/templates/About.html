@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acerca de - MiFacturaPR</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles11.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles11.css') }}"> 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
     <header>
         <div class="navbar">
             <a href="Homepage.html" class="home-button">
-                <img src="logo_mifactura.png" alt="Home" class="logo">
-    
-                <div>
-                    <a href="Facturas.html" >Facturas</a>
-                    <a href="Historial.html">Historial</a> 
-                    <a href="Cuentas.html">Cuentas</a>
-                    <a href="Contactos.html"class="activosobre">Sobre</a>
-                    <a href="Contactos.html">Contactos</a>
-                </div>
-               
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
+
+            </a>
+            <div>
+                <a href="Facturas.html">Facturas</a>
+                <a href="Historial.html">Historial</a> 
+                <a href="Cuentas.html">Cuentas</a>
+                <a href="SobreFacPR.html" class="activosobre">Sobre</a>
+                <a href="Contactos.html">Contactos</a>
+            </div>
+        </div>
     </header>
 
     <div class="logo-container">
@@ -38,14 +40,17 @@
 
             <div class="features">
                 <div class="feature-box">
+                    <i class="fas fa-credit-card feature-icon"></i>
                     <h2>Facilidad de Pago</h2>
                     <p>Realiza tus pagos en un solo lugar sin necesidad de acceder a múltiples plataformas.</p>
                 </div>
                 <div class="feature-box">
+                    <i class="fas fa-bell feature-icon"></i>
                     <h2>Recordatorios Inteligentes</h2>
                     <p>Recibe alertas antes de la fecha de vencimiento para evitar cargos adicionales.</p>
                 </div>
                 <div class="feature-box">
+                    <i class="fas fa-lock feature-icon"></i>
                     <h2>Seguridad y Confianza</h2>
                     <p>Protegemos tu información con los más altos estándares de seguridad.</p>
                 </div>
@@ -54,7 +59,7 @@
     </main>
 
     <footer class="footer">
-                            <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
+        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
     </footer>
 
 </body>
