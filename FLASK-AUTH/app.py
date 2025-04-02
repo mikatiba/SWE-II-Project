@@ -42,7 +42,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form.get('username')
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
@@ -73,14 +73,14 @@ def register():
         session['username'] = username
         session['id_user'] = id_user
 
-        return redirect(url_for('facturas'))
+        return redirect(url_for('home'))
 
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form.get('username')
         cur = mysql.connection.cursor()
         cur.execute("SELECT id_user FROM users WHERE username = %s", (username,))
         user = cur.fetchone()
@@ -89,7 +89,7 @@ def login():
         if user:
             session['username'] = username
             session['id_user'] = user[0]
-            return redirect(url_for('facturas'))
+            return redirect(url_for('home'))
         else:
             return "Usuario no encontrado", 401
 

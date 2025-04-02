@@ -1,26 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Password Recovery</title>
-</head>
-<body>
-    <h2>Password Recovery</h2>
-    <form method="POST" action="{{ url_for('recover') }}">
-        <label for="email">Enter your email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        <input type="submit" value="Send Reset Link">
-    </form>
-
-    {% if message %}
-        <p style="color:green;">{{ message }}</p>
-    {% elif error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
-
-    <p><a href="{{ url_for('login') }}">Back to Login</a></p>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,13 +16,13 @@
             <input type="submit" value="Aceptar">
         </form>
 
-     {% if message %}
+        {% if message %}
             <p class="success-message">{{ message }}</p>
         {% elif error %}
             <p class="error-message">{{ error }}</p>
         {% endif %}
 
-        <p class="back-link"><a href="login.html">Volver a Log-in</a></p>
+        <p class="back-link"><a href="{{ url_for('login') }}">Volver a Log-in</a></p>
     </div>
 </body>
 </html>

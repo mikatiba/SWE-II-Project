@@ -1,28 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Username Recovery</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h2>Username Recovery</h2>
-    <form method="POST">
-        <label for="email">Enter your email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <input type="submit" value="Send Username">
-    </form>
-
-    {% if message %}
-        <p style="color:green;">{{ message }}</p>
-    {% elif error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
-
-    <p><a href="{{ url_for('login') }}">Back to Login</a></p>
-</body>
-</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,15 +12,15 @@
         <h2>Recuperar Usuario</h2>
         <form method="POST">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="Email" placeholder="Email" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
             <input type="submit" value="Aceptar">
         </form>
 
-        <!-- {% if message %}
+        {% if message %}
             <p class="success-message">{{ message }}</p>
         {% elif error %}
             <p class="error-message">{{ error }}</p>
-        {% endif %} -->
+        {% endif %}
 
         <p class="back-link"><a href="{{ url_for('login') }}">Volver a Login</a></p>
     </div>
