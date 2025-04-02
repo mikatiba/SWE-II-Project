@@ -1,0 +1,184 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0b1e30;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;  /* Centra los elementos */
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+    gap: 30px; 
+}
+
+/* Asegurar que los enlaces estén bien distribuidos */
+.navbar div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+
+/* Contenedor */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.about {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.about h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* Estilo especial para el enlace activo */
+.activosobre {
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.centered-image{
+    width: 200px; 
+    height: 200px; 
+    border-radius: 90%; 
+    object-fit: cover; 
+    display: block;
+    margin: 0 auto; 
+}
+.logo-container {
+    margin-top: 20px; /* Aumenta la distancia desde el navbar */
+    margin-bottom: 0px; /* Reduce la distancia hacia el texto */
+    text-align: center; /* Asegura que la imagen esté centrada */
+}
+
+.centered-image {
+    max-width: 100%; /* Asegura que la imagen no sea demasiado grande */
+    height: auto;
+}
+
+.about {
+    padding-top: 0px; /* Elimina cualquier espacio adicional encima del texto */
+}
+
+.contact-methods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.contact-box {
+    background-color: #1B263B;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.contact-icon {
+    font-size: 40px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.contact-box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contact-box p, .contact-box ul {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.contact-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-box ul li {
+    margin: 5px 0;
+}
+
+.contact-box ul li a {
+    color: #4CAF50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-box ul li a:hover {
+    color: #81C784;
+}
+/* Footer */
+.footer {
+    background: #161B22;
+    padding: 20px;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;  /* Asegura que el footer se expanda completamente */
+}
+
