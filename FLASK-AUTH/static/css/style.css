@@ -1,39 +1,43 @@
-/* Fuente Poppins */
+/* General */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    text-align: center;
+    background-color: #171b33;
+    color: #ffffff;
 }
 
 /* Navbar */
-header {
-    background-color: #08182E;
-    padding: 15px 0;
-}
-
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    background-color: #161B22;
+    padding: 15px 20px;
 }
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-}
-
-.nav-links li {
-    margin: 0 15px;
+.navbar .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: 400;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #4CAF50;
+}
+
+.container h2 {
+    
+    color: rgb(255, 255, 255);
+    font-weight: 750;
 }
 
 .auth-buttons .btn {
@@ -42,7 +46,13 @@ header {
     cursor: pointer;
     font-weight: 600;
     border-radius: 5px;
-    margin-left: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-buttons .login {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
 }
 
 .auth-buttons .register {
@@ -52,111 +62,98 @@ header {
 
 .auth-buttons .btn:hover {
     opacity: 0.8;
+    transform: scale(1.05);
 }
 
 
-main {
-    background-color: #0B1523;
-    color: white;
-    padding: 50px 20px;
-}
 
-h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-
-.image-container img {
-    max-width: 78%;
-    height: auto;
+/* Hero Section */
+.centered-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
-/* Estilos para el footer */
-.footer {
-    background: #222; /* Color oscuro */
+.carousel-section {
+    background-color: #233453; /* Fondo oscuro para la sección */
     color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 14px;
-    position: relative;
-    width: 100%;
-    bottom: 0;
 }
 
-/* Asegura que el footer esté pegado abajo si el contenido es poco */
-html, body {
-    /* height: 100%; */
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+.carousel-item img {
+    height: 400px; /* Ajusta la altura de las imágenes */
+    object-fit: cover; /* Asegura que las imágenes se ajusten correctamente */
 }
 
-.main-content {
-    flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
-}
-main {
-    height: 90vh;
-}
-
-/* Botones */
-.buttons {
-    margin: 20px 0;
-}
-
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el texto */
+    padding: 10px;
     border-radius: 5px;
-    margin: 5px;
 }
 
-.dark {
-    background-color: black;
+
+/* Features Section */
+.feature-box {
+    color: whitesmoke;
+    background-color: #171b33;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.features {
+    background-color: #233453; /* Cambia el fondo al color deseado */
+    padding: 400px 0; /* Mantén el espaciado interno */
+    color: white; /* Asegúrate de que el texto sea legible */
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(67, 235, 1, 0.767);
+}
+
+/* Services Section */
+.service-box {
+    background-color: #233453;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: white;
 }
 
-.light {
-    background-color: white;
-    color: black;
+.service-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(13, 236, 5, 0.753);
 }
 
-/*  hover en el navbar */
-.nav-links a {
+.service-image {
+    height: 200px;
+    object-fit: contain;
+    padding: 20px;
+}
+
+
+/* Hero Section */
+.hero {
+    background-color: #0B1523;
     color: white;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+.footer a {
     text-decoration: none;
-    font-weight: 400;
     transition: color 0.3s ease-in-out;
 }
 
-
-/* hover en el navbar */
-.nav-links a:hover {
-    color: #4CAF50; 
-}
-
-/* hover en los botones */
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-    transform: scale(1.05); /* Hace que el botón crezca un poco */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/*  focus en botones */
-.btn:focus {
-    outline: 3px solid #4CAF50; /* Resalta el botón seleccionado */
-    outline-offset: 2px;
+.footer a:hover {
+    color: #4CAF50;
 }
