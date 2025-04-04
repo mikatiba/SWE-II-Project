@@ -1,170 +1,134 @@
-/* Fuente Poppins */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #051020;
-    text-align: center;
-}
-
 /* Navbar */
-header {
-    background-color: #08182E;
-    padding: 15px 0;
-}
-
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 10px 20px;
+    background-color: #161B22; /* Fondo oscuro */
+    color: white;
 }
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
+.navbar .home-button img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Logo redondo */
 }
 
-.nav-links li {
-    margin: 0 15px;
-}
-
-.nav-links a {
+.navbar .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: 400;
+    margin: 0 10px;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
-.auth-buttons .btn {
-    padding: 8px 15px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
+.navbar .nav-links a:hover {
+    color: #4CAF50; /* Verde al pasar el cursor */
+}
+
+.navbar .auth-buttons .btn {
+    font-size: 14px;
+    padding: 5px 15px;
     border-radius: 5px;
-    margin-left: 10px;
 }
 
-.auth-buttons .register {
-    background-color: #4CAF50;
+.navbar .auth-buttons .btn-outline-light:hover {
+    background-color: white;
+    color: #161B22;
+    border-color: white;
+}
+
+.navbar .auth-buttons .btn-success:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #0B1523; /* Fondo oscuro */
     color: white;
+    padding: 50px 0;
+    text-align: center;
 }
 
-.auth-buttons .btn:hover {
-    opacity: 0.8;
-}
-
-
-main {
-    background-color: #0B1523;
-    color: rgb(255, 255, 255);
-    padding: 50px 20px;
-}
-
-h1 {
-    font-size: 36px;
+.hero img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Logo circular */
     margin-bottom: 20px;
 }
 
-
-.image-container img {
-    max-width: 78%;
-    height: auto;
-    object-fit: cover;
+.hero h1 {
+    font-size: 48px;
+    font-weight: bold;
 }
 
-/* Estilos para el footer */
-.footer {
-    background: #222; /* Color oscuro */
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Carousel Section */
+.carousel-section {
+    background-color: #233453; /* Fondo oscuro */
     color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 14px;
-    position: relative;
-    width: 100%;
-    bottom: 0;
 }
 
-/* Asegura que el footer esté pegado abajo si el contenido es poco */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+.carousel-item img {
+    height: 400px; /* Ajusta la altura de las imágenes */
+    object-fit: cover; /* Asegura que las imágenes se ajusten correctamente */
+    width: 100%; /* Asegura que las imágenes ocupen todo el ancho */
 }
 
-.main-content {
-    flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
-}
-
-/* Botones */
-.buttons {
-    margin: 20px 0;
-}
-
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    padding: 10px;
     border-radius: 5px;
-    margin: 5px;
 }
 
-.dark {
-    background-color: black;
+/* Features Section */
+.features .feature-box {
+    background-color: #171b33; /* Fondo oscuro para las cajas */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: white;
 }
 
-.light {
-    background-color: rgb(255, 255, 255);
-    color: black;
+.features .feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.3);
 }
 
-/*  hover en el navbar */
-.nav-links a {
+.features .feature-box i {
+    margin-bottom: 10px;
+}
+
+.payment-icons i {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.payment-icons i:hover {
+    color: #4CAF50; /* Verde al pasar el cursor */
+}
+
+/* Footer */
+.footer {
+    background-color: #161B22;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer a {
     color: white;
     text-decoration: none;
-    font-weight: 400;
-    transition: color 0.3s ease-in-out;
+    margin: 0 10px;
+    transition: color 0.3s ease;
 }
 
-
-/* hover en el navbar */
-.nav-links a:hover {
-    color: #4CAF50; 
+.footer a:hover {
+    color: #4CAF50; /* Verde al pasar el cursor */
 }
-
-/* hover en los botones */
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-    transform: scale(1.05); /* Hace que el botón crezca un poco */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/*  focus en botones */
-.btn:focus {
-    outline: 3px solid #4CAF50; /* Resalta el botón seleccionado */
-    outline-offset: 2px;
-}
-
-.imagen-lum {
-    display: block;
-    width: 80%; /* Ajusta según sea necesario */
-    max-width: 800px; /* Define un límite de tamaño */
-    height: auto;
-    border-radius: 50%; /* Hace la imagen ovalada */
-    object-fit: cover;
-    margin: 20px auto; /* Centra la imagen */
-    overflow: hidden; /* Asegura que el borde se mantenga */
-}
-
