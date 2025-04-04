@@ -17,11 +17,11 @@
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
             </a>
             <div>
-                <a href="Facturas.html">Facturas</a>
-                <a href="Historial.html">Historial</a> 
-                <a href="Cuentas.html">Cuentas</a>
-                <a href="SobreFacPR.html">Sobre</a>
-                <a href="Contactos.html" class="activosobre">Contactos</a>
+                <a href="{{ url_for('facturas') }}">Facturas</a>
+                <a href="{{ url_for('historial') }}">Historial</a> 
+                <a href="{{ url_for('cuentas') }}">Cuentas</a>
+                <a href="{{ url_for('about') }}">Sobre</a>
+                <a href="{{ url_for('contactos') }}" class="activocuentas">Contactos</a>
             </div>
         </div>
     </header>
