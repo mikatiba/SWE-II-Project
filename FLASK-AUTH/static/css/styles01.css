@@ -43,6 +43,72 @@
     border-color: #28a745;
 }
 
+/* Animación del logo */
+.logo {
+    animation: spinAndBounce 2s ease-in-out;
+}
+
+@keyframes spinAndBounce {
+    0% {
+        transform: scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+.hero img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Logo circular */
+    margin-bottom: 20px;
+    animation: zoomIn 2s ease-in-out; /* Aplica la animación */
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5); /* Imagen más pequeña al inicio */
+        opacity: 0; /* Imagen invisible al inicio */
+    }
+    100% {
+        transform: scale(1); /* Tamaño normal */
+        opacity: 1; /* Imagen completamente visible */
+    }
+}
+
+/* Animación de texto */
+.animated-text {
+    display: inline-block;
+    position: relative;
+    color: white;
+    animation: fadeInText 2s ease-in-out;
+}
+
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.auth-buttons .btn {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.auth-buttons .btn:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    background-color: #28a745; /* Cambia el color del botón */
+}
+.auth-buttons .btn {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
 /* Hero Section */
 .hero {
     background-color: #0B1523; /* Fondo oscuro */
@@ -86,7 +152,47 @@
     border-radius: 5px;
 }
 
+.carousel-item img {
+    transition: transform 0.5s ease;
+}
+
+.carousel-item.active img {
+    transform: scale(1.05); /* Zoom suave */
+}
+
 /* Features Section */
+
+
+.features .feature-box {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 3s ease forwards;
+}
+
+.features .feature-box:nth-child(1) {
+    animation-delay: 1.7s;
+}
+.features .feature-box:nth-child(2) {
+    animation-delay: 1.8s;
+}
+.features .feature-box:nth-child(3) {
+    animation-delay: 1.9s;
+}
+.features .feature-box:nth-child(4) {
+    animation-delay: 2s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .features .feature-box {
     background-color: #171b33; /* Fondo oscuro para las cajas */
     padding: 20px;
@@ -98,12 +204,21 @@
 
 .features .feature-box:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 8px 20px rgb(21, 255, 0);
 }
 
 .features .feature-box i {
     margin-bottom: 10px;
 }
+
+.feature-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgb(72, 255, 0);
+}
+
 
 .payment-icons i {
     color: white;
@@ -112,6 +227,69 @@
 
 .payment-icons i:hover {
     color: #4CAF50; /* Verde al pasar el cursor */
+}
+
+.btn-primary {
+    background-color: #4CAF50; /* Verde */
+    border-color: #4CAF50;
+}
+.btn-primary:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.testimonials .card {
+    border: none;
+    border-radius: 10px;
+    background-color: #1e2a47; /* Fondo oscuro personalizado */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials .card:hover {
+    transform: translateY(-10px); /* Efecto de elevación */
+    box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.2); /* Sombra al pasar el cursor */
+}
+
+.testimonials .card-text {
+    font-size: 16px;
+    font-style: italic;
+    color: #d1d1d1; /* Texto en gris claro */
+}
+
+.testimonials .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50; /* Verde para destacar el nombre */
+    margin-top: 10px;
+}
+.testimonials-carousel .testimonial-item {
+    padding: 20px;
+    background-color: #1e2a47; /* Fondo oscuro */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: #d1d1d1; /* Texto gris claro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials-carousel .testimonial-item:hover {
+    transform: translateY(-10px); /* Efecto de elevación */
+    box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.2); /* Sombra al pasar el cursor */
+}
+
+.testimonials-carousel .testimonial-text {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonials-carousel .testimonial-author {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50; /* Verde para destacar el nombre */
 }
 
 /* Footer */
