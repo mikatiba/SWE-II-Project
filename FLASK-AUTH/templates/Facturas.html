@@ -25,6 +25,40 @@
     <div class="container">
         <h2>Mis Facturas</h2>
 
+
+        {% for factura in facturas %}
+        <div class="bill">
+            {% if factura[3] == 'LUMA' %}
+                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
+                <div class="bill-info">
+                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
+                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
+                    <!-- Botón redirige a Pago_Luma.html -->
+                    <a href="{{ url_for('pago_luma', factura_id=factura[0]) }}" class="btn btn-primary">Pagar Factura</a>
+                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
+                </div>
+            {% elif factura[3] == 'AAA' %}
+                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
+                <div class="bill-info">
+                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
+                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
+                    <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
+                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
+                </div>
+            {% else %}
+                <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
+                <div class="bill-info">
+                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
+                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
+                    <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
+                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+
+        <!-- ORIGINAL 
         {% for factura in facturas %}
         <div class="bill">
             {% if factura[3] == 'LUMA' %}
@@ -42,7 +76,7 @@
             </div>
         </div>
         {% endfor %}
-    </div>
+    </div> -->
 
     <!-- Overlay y Formulario -->
     <div id="overlay" class="hidden"></div>
