@@ -13,11 +13,11 @@
 </head>
 
 <body>
-   
+
     <header>
         <div class="navbar">
             <a href="Homepage.html" class="home-button">
-                <img src="logo_mifactura.png" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
             </a>
             <div class="nav-links">
                 <a href="Facturas.html">Facturas</a>
@@ -37,7 +37,7 @@
     <section class="hero text-center py-5" style="background-color: #0B1523; color: white;">
         <div class="container">
            
-            <img src="logo2.png" alt="Logo MiFacturaPR" class="rounded-circle mb-4" style="width: 150px; height: 150px;">
+            <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo MiFacturaPR" class="rounded-circle mb-4" style="width: 150px; height: 150px;">
             <h1 class="display-4 animated-text">Bienvenido a MiFacturaPR</h1>
             <p class="lead">La plataforma más confiable para gestionar tus pagos de agua y electricidad en Puerto Rico.</p>
             <div class="mt-4">
@@ -46,6 +46,39 @@
             </div>
         </div>
     </section>
+   
+  <!-- <header>
+        <div class="navbar">
+            <a href="Homepage.html" class="home-button">
+                <img src="logo_mifactura.png" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
+            </a>
+            <div class="nav-links">
+                <a href="Facturas.html">Facturas</a>
+                <a href="Historial.html">Historial</a>
+                <a href="Cuentas.html">Cuentas</a>
+                <a href="SobreFacPR.html">Sobre</a>
+                <a href="Contactos.html">Contactos</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="#"><button class="btn btn-outline-light me-2">Iniciar Sesión</button></a>
+                <a href="#"><button class="btn btn-success">Registrarse</button></a>
+            </div>
+        </div>
+    </header>
+
+  
+    <section class="hero text-center py-5" style="background-color: #0B1523; color: white;">
+        <div class="container">
+           
+            <img src="logo2.png" alt="Logo MiFacturaPR" class="rounded-circle mb-4" style="width: 150px; height: 150px;">
+            <h1 class="display-4 animated-text">Bienvenido a MiFacturaPR</h1>
+            <p class="lead">La plataforma más confiable para gestionar tus pagos de agua y electricidad en Puerto Rico.</p>
+            <div class="mt-4">
+                <a href="#" class="btn btn-primary btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                <a href="#" class="btn btn-success btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
+            </div>
+        </div>
+    </section> -->
 
 <!-- Carousel Section -->
 <section class="carousel-section py-5" style="background-color: #233453; color: white;">
@@ -55,7 +88,7 @@
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
-                    <img src="jobluma.png" class="d-block w-100" alt="LUMA Energy">
+                    <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Trabajador arreglando poste" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>LUMA Energy</h5>
                         <p>Gestiona tus pagos de electricidad de manera rápida y sencilla.</p>
@@ -63,7 +96,7 @@
                 </div>
                 <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="jobaaa.png" class="d-block w-100" alt="Acueductos PR">
+                    <img src="{{ url_for('static', filename='images/jobaaa.png') }}" alt="Trabajador de acueductos" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Acueductos de PR</h5>
                         <p>Realiza tus pagos de agua con facilidad y mantén tus servicios al día.</p>
@@ -71,15 +104,15 @@
                 </div>
                 <!-- Slide 3 -->
                 <div class="carousel-item">
-                    <img src="Sanjuan.jpeg" class="d-block w-100" alt="San Juan">
+                    <img src="{{ url_for('static', filename='images/Sanjuan.jpeg') }}" alt="Vista de San Juan" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>San Juan</h5>
-                        <p>Descubre cómo MiFacturaPR facilita tus pagos en la capital.</p>
+                        <p>Descubre cómo MiFacturaPR facilita tus pagos .</p>
                     </div>
                 </div>
                 <!-- Slide 4 -->
                 <div class="carousel-item">
-                    <img src="logo2.png" class="d-block w-100" alt="MiFacturaPR">
+                    <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo de MiFacturaPR" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>MiFacturaPR</h5>
                         <p>Tu plataforma confiable para gestionar todas tus facturas.</p>
@@ -87,7 +120,7 @@
                 </div>
                 <!-- Slide 5 -->
                 <div class="carousel-item">
-                    <img src="inter.jpg" class="d-block w-100" alt="Inter">
+                    <img src="{{ url_for('static', filename='images/inter.jpg') }}" alt="Inter" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Universidad Inter Americana de Arecibo</h5>
                         <p>Proyecto Final para Ingeniería de Software II, Universidad Inter Americana de Arecibo.</p>
