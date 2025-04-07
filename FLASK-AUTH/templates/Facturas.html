@@ -26,7 +26,7 @@
         <h2>Mis Facturas</h2>
 
 
-        {% for factura in facturas %}
+        <!-- {% for factura in facturas %}
         <div class="bill">
             {% if factura[3] == 'LUMA' %}
                 <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
@@ -55,10 +55,10 @@
                 </div>
             {% endif %}
         </div>
-        {% endfor %}
+        {% endfor %} -->
 
 
-        <!-- ORIGINAL 
+      
         {% for factura in facturas %}
         <div class="bill">
             {% if factura[3] == 'LUMA' %}
@@ -76,7 +76,7 @@
             </div>
         </div>
         {% endfor %}
-    </div> -->
+    </div> 
 
     <!-- Overlay y Formulario -->
     <div id="overlay" class="hidden"></div>
