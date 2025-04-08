@@ -25,40 +25,6 @@
     <div class="container">
         <h2>Mis Facturas</h2>
 
-
-        {% for factura in facturas %}
-        <div class="bill">
-            {% if factura[3] == 'LUMA' %}
-                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
-                <div class="bill-info">
-                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
-                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
-                    <!-- Botón redirige a Pago_Luma.html -->
-                    <a href="{{ url_for('pago_luma', factura_id=factura[0]) }}" class="btn btn-primary">Pagar Factura</a>
-                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
-                </div>
-            {% elif factura[3] == 'AAA' %}
-                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
-                <div class="bill-info">
-                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
-                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
-                    <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
-                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
-                </div>
-            {% else %}
-                <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
-                <div class="bill-info">
-                    <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
-                    <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
-                    <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
-                    <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
-                </div>
-            {% endif %}
-        </div>
-        {% endfor %}
-
-
-        <!-- ORIGINAL 
         {% for factura in facturas %}
         <div class="bill">
             {% if factura[3] == 'LUMA' %}
@@ -68,17 +34,25 @@
             {% else %}
                 <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
             {% endif %}
+
             <div class="bill-info">
                 <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
                 <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
-                <button class="pay-button" data-metodo="{{ factura[3] }}" data-amount="{{ factura[1] }}">PAGAR</button>
+
+                <button class="pay-button"
+                        data-metodo="{{ factura[3] }}"
+                        data-amount="{{ factura[1] }}"
+                        data-expiry="{{ factura[2].strftime('%Y-%m-%d') }}">
+                    PAGAR
+                </button>
+
                 <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
             </div>
         </div>
         {% endfor %}
-    </div> -->
+    </div>
 
-    <!-- Overlay y Formulario -->
+    <!-- Overlay y Formulario de Pago -->
     <div id="overlay" class="hidden"></div>
 
     <div id="formulario-pago" class="hidden">
@@ -86,12 +60,13 @@
         <form id="payment-form" method="POST" action="{{ url_for('procesar_pago') }}">
             <input type="hidden" id="servicio" name="servicio">
             <input type="hidden" id="payment-amount" name="amount">
+            <input type="hidden" id="expiry-hidden" name="expiry_date">
 
             <label for="card-number">Número de Tarjeta:</label>
             <input type="text" id="card-number" name="card_number" required>
 
             <label for="expiry-date">Fecha de Expiración:</label>
-            <input type="text" id="expiry-date" name="expiry_date" required>
+            <input type="text" id="expiry-date" name="expiry_date_visible" placeholder="MM/AA" required>
 
             <label for="cvv">CVV:</label>
             <input type="text" id="cvv" name="cvv" required>
@@ -103,5 +78,28 @@
     <footer class="footer">
         <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        document.querySelectorAll('.pay-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const servicio = button.dataset.metodo;
+                const monto = button.dataset.amount;
+                const vencimiento = button.dataset.expiry;
+
+                document.getElementById('servicio').value = servicio;
+                document.getElementById('payment-amount').value = monto;
+                document.getElementById('expiry-hidden').value = vencimiento;
+
+                document.getElementById('formulario-pago').classList.remove('hidden');
+                document.getElementById('overlay').classList.remove('hidden');
+            });
+        });
+
+        //cerrar el formulario haciendo clic en el overlay
+        document.getElementById('overlay').addEventListener('click', () => {
+            document.getElementById('formulario-pago').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+        });
+    </script>
 </body>
 </html>

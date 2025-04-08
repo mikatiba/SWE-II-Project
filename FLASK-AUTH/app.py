@@ -49,6 +49,16 @@ def register():
 
         cur = mysql.connection.cursor()
 
+        # Verificar si el username o el email ya existen
+        cur.execute("SELECT * FROM users WHERE username = %s OR email = %s", (username, email))
+        existing_user = cur.fetchone()
+
+        if existing_user:
+            cur.close()
+            error = "El nombre de usuario o correo electrónico ya está registrado."
+            return render_template('register.html', error=error)
+
+        # Insertar nuevo usuario
         cur.execute("""
             INSERT INTO users (username, name, email, password)
             VALUES (%s, %s, %s, %s)
@@ -69,14 +79,13 @@ def register():
 
         cur.close()
 
-        # Iniciar sesión inmediatamente después de registrarse
         session['username'] = username
         session['id_user'] = id_user
 
         return redirect(url_for('home'))
 
     return render_template('register.html')
-
+      
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -308,6 +317,14 @@ def ver_facturas_cuenta():
     cur.close()
 
     return render_template('facturas.html', name=session['username'], facturas=facturas)
+
+@app.route('/about')
+def about():
+    return render_template('About.html')
+
+@app.route('/contactos')
+def contactos():
+    return render_template('contactos.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
