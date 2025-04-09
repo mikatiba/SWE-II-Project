@@ -9,6 +9,9 @@
     word-spacing: 15px;
 }
 
+.navbar:hover {
+    color: #4CAF50; /* Verde al pasar el cursor */
+}
 .navbar .home-button img {
     width: 50px;
     height: 50px;

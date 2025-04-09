@@ -186,6 +186,31 @@ body {
     outline: none;
 }
 
+.card-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.card-input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.payment-icon {
+    font-size: 24px;
+    color: #333;
+}
+
 .btn-pagar {
     width: 100%;
     padding: 12px;
