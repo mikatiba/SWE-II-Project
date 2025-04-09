@@ -15,24 +15,23 @@
 <body>
 
     <header>
-        <div class="navbar">
+        <div class="navbar d-flex justify-content-between align-items-center px-4 py-2" style="background-color: #0B1523;">
             <a href="{{ url_for('home') }}" class="home-button">
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
             </a>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('facturas') }}">Facturas</a></li>
-                <li><a href="{{ url_for('historial') }}">Historial</a></li>
-                <li><a href="{{ url_for('cuentas') }}">Cuentas</a></li>
-                <li><a href="{{ url_for('about') }}">Sobre</a></li>
-                <li><a href="{{ url_for('contactos') }}">Contactos</a></li>
+            
+            <ul class="nav d-flex gap-3 m-0 list-unstyled">
+                <li><a href="{{ url_for('facturas') }}" class="text-white text-decoration-none">Facturas</a></li>
+                <li><a href="{{ url_for('historial') }}" class="text-white text-decoration-none">Historial</a></li>
+                <li><a href="{{ url_for('cuentas') }}" class="text-white text-decoration-none">Cuentas</a></li>
+                <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none">Sobre</a></li>
+                <li><a href="{{ url_for('contactos') }}" class="text-white text-decoration-none">Contactos</a></li>
             </ul>
-            <div class="auth-buttons">
+    
+            <div class="auth-buttons text-white d-flex align-items-center gap-2">
                 {% if name %}
                     <span>Bienvenido, {{ name }}!</span>
-                    <a href="{{ url_for('logout') }}"><button class="btn btn-outline-light me-2">Logout</button></a>
-                {% else %}
-                    <a href="{{ url_for('login') }}"><button class="btn btn-outline-light me-2">Iniciar Sesión</button></a>
-                    <a href="{{ url_for('register') }}"><button class="btn btn-success">Registrarse</button></a>
+                    <a href="{{ url_for('logout') }}"><button class="btn btn-outline-light btn-sm">Logout</button></a>
                 {% endif %}
             </div>
         </div>
@@ -45,8 +44,6 @@
             <h1 class="display-4 animated-text">Bienvenido a MiFacturaPR</h1>
             <p class="lead">La plataforma más confiable para gestionar tus pagos de agua y electricidad en Puerto Rico.</p>
             <div class="mt-4">
-                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
-                <a href="{{ url_for('register') }}" class="btn btn-success btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
             </div>
         </div>
     </section>

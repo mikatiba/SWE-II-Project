@@ -18,11 +18,13 @@
             <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
             </a>
             <div class="nav-links">
-                <a href="Facturas.html">Facturas</a>
-                <a href="Historial.html">Historial</a>
-                <a href="Cuentas.html">Cuentas</a>
-                <a href="SobreFacPR.html">Sobre</a>
-                <a href="contactos.html">Contactos</a>
+                <ul class="nav d-flex gap-3 m-0 list-unstyled">
+                    <li><a href="{{ url_for('facturas') }}" class="text-white text-decoration-none">Facturas</a></li>
+                    <li><a href="{{ url_for('historial') }}" class="text-white text-decoration-none">Historial</a></li>
+                    <li><a href="{{ url_for('cuentas') }}" class="text-white text-decoration-none">Cuentas</a></li>
+                    <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none">Sobre</a></li>
+                    <li><a href="{{ url_for('contactos') }}" class="text-white text-decoration-none">Contactos</a></li>
+                </ul>
             </div>
             <div class="auth-buttons">
                 <a href="{{ url_for('login') }}"><button class="btn login">Iniciar Sesión</button></a>
