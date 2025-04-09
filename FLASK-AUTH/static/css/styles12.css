@@ -6,13 +6,18 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #0b1e30;
-    color: white;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #0b1e30; /* Fondo claro */
+    color: #333; /* Texto oscuro */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+}
+
+/* Ocultar la barra  */
+body::-webkit-scrollbar {
+    width: 8px; 
 }
 
 
@@ -84,7 +89,7 @@ main {
 
 
 /* Estilo especial para el enlace activo */
-.activosobre {
+.activoscontactos {
     color: white;
     background-color: #4CAF50;
     font-weight: bold;

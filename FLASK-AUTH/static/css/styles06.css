@@ -32,11 +32,13 @@ body {
 
 .login-box {
     background-color: #1A1A1A;
-    padding: 40px;
+    padding: 20px; /* Reducir el padding */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgb(50, 252, 0);
     text-align: center;
-    width: 400px;
+    width: 380px; 
+    max-height: 80vh; 
+    overflow-y: auto; 
 }
 
 .logo {
