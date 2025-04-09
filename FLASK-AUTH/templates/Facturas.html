@@ -46,12 +46,27 @@
                     PAGAR
                 </button>
 
-                <p><strong>Vence en:</strong> {{ factura[2].strftime('%d de %B del %Y') }}</p>
+                <p><strong>Vence en:</strong>
+                    {{ factura[2].strftime('%d') }} de
+                    {% set mes = factura[2].strftime('%m') %}
+                    {% if mes == '01' %}enero
+                    {% elif mes == '02' %}febrero
+                    {% elif mes == '03' %}marzo
+                    {% elif mes == '04' %}abril
+                    {% elif mes == '05' %}mayo
+                    {% elif mes == '06' %}junio
+                    {% elif mes == '07' %}julio
+                    {% elif mes == '08' %}agosto
+                    {% elif mes == '09' %}septiembre
+                    {% elif mes == '10' %}octubre
+                    {% elif mes == '11' %}noviembre
+                    {% elif mes == '12' %}diciembre
+                    {% endif %} del {{ factura[2].strftime('%Y') }}
+                </p>
             </div>
         </div>
         {% endfor %}
     </div>
-    </div> 
 
     <!-- Overlay y Formulario de Pago -->
     <div id="overlay" class="hidden"></div>
@@ -96,7 +111,6 @@
             });
         });
 
-        //cerrar el formulario haciendo clic en el overlay
         document.getElementById('overlay').addEventListener('click', () => {
             document.getElementById('formulario-pago').classList.add('hidden');
             document.getElementById('overlay').classList.add('hidden');
