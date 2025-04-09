@@ -15,7 +15,7 @@
 <body>
 
     <header>
-        <div class="navbar d-flex justify-content-between align-items-center px-4 py-2" style="background-color: #0B1523;">
+        <div class="navbar d-flex justify-content-between align-items-center px-4 py-2" style="background-color:rgb(8, 10, 37);">
             <a href="{{ url_for('home') }}" class="home-button">
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
             </a>
@@ -100,6 +100,43 @@
             </div>
         </div>
     </section>
+
+
+        <!-- Features -->
+        <div class="features mt-5">
+            <div class="row">
+                <!-- Métodos de Pago -->
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
+                        <h3>Compatibilidad con Métodos de Pago</h3>
+                        <p>MiFacturaPR es compatible con ATH Móvil, PayPal, Visa, Mastercard, Discover y pagos en efectivo.</p>
+                       
+                    </div>
+                </div>
+
+                <!--Seguridad y Confianza -->
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <i class="fas fa-lock fa-3x text-success mb-3"></i>
+                        <h3>Seguridad y Confianza</h3>
+                        <p>Protegemos tu información con los más altos estándares de seguridad para garantizar la privacidad de tus datos.</p>
+                    </div>
+                </div>
+
+                <!-- Recordatorios Inteligentes -->
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <i class="fas fa-bell fa-3x text-warning mb-3"></i>
+                        <h3>Recordatorios Inteligentes</h3>
+                        <p>Recibe notificaciones antes de la fecha de vencimiento para evitar cargos adicionales y mantener tus servicios al día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- LUMA  -->
     <section class="py-5" style="background-color: #171b33; color: white;">

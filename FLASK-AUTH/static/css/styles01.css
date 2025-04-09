@@ -6,6 +6,7 @@
     padding: 10px 20px;
     background-color: #161B22; /* Fondo oscuro */
     color: white;
+    word-spacing: 15px;
 }
 
 .navbar .home-button img {
