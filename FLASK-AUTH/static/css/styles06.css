@@ -8,6 +8,21 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.back-arrow i {
+    margin-right: 5px;
+}
+
 .login-container {
     display: flex;
     justify-content: center;
