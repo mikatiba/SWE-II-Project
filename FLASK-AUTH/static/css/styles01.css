@@ -47,6 +47,23 @@
     border-color: #28a745;
 }
 
+/* Navbar con flexbox a ver*/
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px; /* Espacio entre enlaces */
+    transition: color 0.3s ease;
+}
+
+.nav a:last-child {
+    margin-right: 0; /* Elimina el margen del último enlace */
+}
+
+.nav {
+    gap: 15px; /* Si estás usando flexbox, puedes usar gap */
+}
+
+
 /* Animación del logo */
 .logo {
     animation: spinAndBounce 2s ease-in-out;
