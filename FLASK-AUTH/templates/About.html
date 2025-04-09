@@ -13,16 +13,15 @@
 
     <header>
         <div class="navbar">
-            <a href="Homepage.html" class="home-button">
+            <a href="{{ url_for('home') }}" class="home-button">
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
-
             </a>
             <div>
-                <a href="Facturas.html">Facturas</a>
-                <a href="Historial.html">Historial</a> 
-                <a href="Cuentas.html">Cuentas</a>
-                <a href="SobreFacPR.html" class="activosobre">Sobre</a>
-                <a href="Contactos.html">Contactos</a>
+                <a href="{{ url_for('facturas') }}">Facturas</a>
+                <a href="{{ url_for('historial') }}">Historial</a> 
+                <a href="{{ url_for('cuentas') }}">Cuentas</a>
+                <a href="{{ url_for('about') }}" class="activosobre">Sobre</a>
+                <a href="{{ url_for('contactos') }}">Contactos</a>
             </div>
         </div>
     </header>
