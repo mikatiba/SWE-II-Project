@@ -82,7 +82,22 @@
             <input type="text" id="card-number" name="card_number" required>
 
             <label for="expiry-date">Fecha de Expiración:</label>
-            <input type="text" id="expiry-date" name="expiry_date_visible" placeholder="MM/AA" required>
+            <div style="display: flex; gap: 10px;">
+                <select id="expiry-month" required>
+                    <option value="" disabled selected>Mes</option>
+                    {% for m in range(1, 13) %}
+                        <option value="{{ '%02d' % m }}">{{ '%02d' % m }}</option>
+                    {% endfor %}
+                </select>
+
+                <select id="expiry-year" required>
+                    <option value="" disabled selected>Año</option>
+                    {% set current_year = current_year or 2025 %}
+                    {% for y in range(current_year, current_year + 11) %}
+                        <option value="{{ y }}">{{ y }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
             <label for="cvv">CVV:</label>
             <input type="text" id="cvv" name="cvv" required>
@@ -114,6 +129,19 @@
         document.getElementById('overlay').addEventListener('click', () => {
             document.getElementById('formulario-pago').classList.add('hidden');
             document.getElementById('overlay').classList.add('hidden');
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', function (e) {
+            const mes = document.getElementById('expiry-month').value;
+            const year = document.getElementById('expiry-year').value;
+
+            if (!mes || !year) {
+                alert("Por favor, seleccione mes y año válidos.");
+                e.preventDefault();
+                return;
+            }
+
+            document.getElementById('expiry-hidden').value = `${mes}/${year.toString().slice(-2)}`;
         });
     </script>
 </body>
