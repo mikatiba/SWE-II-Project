@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from flask_mail import Message, Mail
 from itsdangerous import URLSafeTimedSerializer
+import json
 
 load_dotenv()
 
@@ -196,15 +197,33 @@ def cuentas():
 
     id_user = session['id_user']
     cur = mysql.connection.cursor()
-    cur.execute("""
-        SELECT account_number
-        FROM Account
-        WHERE id_user = %s
-    """, (id_user,))
+
+    # Obtener cuentas
+    cur.execute("SELECT account_number FROM Account WHERE id_user = %s", (id_user,))
     cuentas = [row[0] for row in cur.fetchall()]
+
+    # Obtener totales por servicio
+    cur.execute("""
+        SELECT S.service_name, SUM(P.amount)
+        FROM Payment P
+        JOIN Service S ON P.id_service = S.id_service
+        WHERE P.id_user = %s
+        GROUP BY S.service_name
+    """, (id_user,))
+    rows = cur.fetchall()
     cur.close()
 
-    return render_template('cuentas.html', name=session['username'], cuentas=cuentas)
+    labels = [row[0] for row in rows]
+    data = [float(row[1]) for row in rows]
+
+    # Asignar colores según servicio
+    color_map = {
+        'AAA': 'rgba(54, 162, 235, 0.7)',    # Azul
+        'LUMA': 'rgba(75, 192, 75, 0.7)'      # Verde
+    }
+    colors = [color_map.get(service, 'rgba(153, 102, 255, 0.7)') for service in labels]
+
+    return render_template('cuentas.html', cuentas=cuentas, labels=labels, data=data, colors=colors)
 
 @app.route('/facturas')
 def facturas():
