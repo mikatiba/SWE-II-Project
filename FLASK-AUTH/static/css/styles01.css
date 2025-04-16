@@ -214,13 +214,17 @@
     }
 }
 
-.features .feature-box {
-    background-color: #171b33; /* Fondo oscuro para las cajas */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.feature-box {
+    background-color: #171b33; /* Fondo oscuro original */
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
 }
 
 .features .feature-box:hover {
@@ -330,4 +334,11 @@ section {
 
 .footer a:hover {
     color: #4CAF50; /* Verde al pasar el cursor */
+}
+
+.welcome-message {
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
 }

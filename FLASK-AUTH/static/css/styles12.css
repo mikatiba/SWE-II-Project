@@ -75,11 +75,13 @@ main {
     max-width: 800px;
     margin: auto;
     text-align: center;
+    color:white;
 }
 
 .about h1 {
     font-size: 32px;
     margin-bottom: 20px;
+    color:#4CAF50;
 }
 
 .about p {

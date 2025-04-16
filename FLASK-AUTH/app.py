@@ -101,7 +101,7 @@ def login():
             session['id_user'] = user[0]
             return redirect(url_for('home'))
         else:
-            return "Usuario no encontrado", 401
+            return render_template('error.html', mensaje="Usuario no encontrado")
 
     return render_template('login.html')
 
@@ -132,9 +132,11 @@ def recover():
             msg.body = f"Please click the following link to reset your password: {reset_link}"
             mail.send(msg)
 
-            return render_template('recover.html', message="A password reset link has been sent to your email.")
+            # Redirige de vuelta al perfil con mensaje de éxito
+            return redirect(url_for('perfil', mensaje='enlace_enviado'))
 
         else:
+            # Enviar error visible en la vista recover tradicional
             return render_template('recover.html', error="Email not found!")
 
     return render_template('recover.html')
@@ -184,10 +186,45 @@ def recover_username():
 
     return render_template('recover_username.html')
 
+@app.route('/eliminar_usuario', methods=['POST'])
+def eliminar_usuario():
+    if 'id_user' not in session:
+        return redirect(url_for('login'))
+
+    id_user = session['id_user']
+
+    cur = mysql.connection.cursor()
+
+    # Borrar pagos
+    cur.execute("DELETE FROM Payment WHERE id_user = %s", (id_user,))
+
+    # Borrar facturas
+    cur.execute("DELETE FROM Bill WHERE id_user = %s", (id_user,))
+
+    # Borrar cuentas
+    cur.execute("DELETE FROM Account WHERE id_user = %s", (id_user,))
+
+    # Borrar usuario
+    cur.execute("DELETE FROM users WHERE id_user = %s", (id_user,))
+
+    mysql.connection.commit()
+    cur.close()
+
+    session.clear()
+    return redirect(url_for('index'))  # o mostrar una página de despedida
+
 @app.route('/home')
 def home():
     if 'username' in session:
-        return render_template('home.html', name=session['username'])
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT name FROM users WHERE username = %s", (session['username'],))
+        user = cur.fetchone()
+        cur.close()
+
+        if user:
+            # Elimina espacios extra y extrae solo el primer nombre
+            first_name = user[0].strip().split()[0]
+            return render_template('home.html', name=first_name)
     return redirect(url_for('login'))
 
 @app.route('/cuentas')
@@ -344,6 +381,23 @@ def about():
 @app.route('/contactos')
 def contactos():
     return render_template('contactos.html')
+
+@app.route('/perfil')
+def perfil():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT email FROM users WHERE username = %s", (username,))
+    user = cur.fetchone()
+    cur.close()
+
+    mensaje = request.args.get('mensaje')  # 👈 recibe parámetro opcional
+
+    if user:
+        return render_template('perfil.html', email=user[0], mensaje=mensaje)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

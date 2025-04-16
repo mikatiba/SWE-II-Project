@@ -26,12 +26,14 @@
                 <li><a href="{{ url_for('cuentas') }}" class="text-white text-decoration-none">Cuentas</a></li>
                 <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none">Sobre</a></li>
                 <li><a href="{{ url_for('contactos') }}" class="text-white text-decoration-none">Contactos</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="text-white text-decoration-none">Perfil</a></li>
             </ul>
-    
-            <div class="auth-buttons text-white d-flex align-items-center gap-2">
+            <div class="auth-buttons text-white d-flex align-items-center">
                 {% if name %}
-                    <span>Bienvenido, {{ name }}!</span>
-                    <a href="{{ url_for('logout') }}"><button class="btn btn-outline-light btn-sm">Logout</button></a>
+                <span class="welcome-text">Bienvenido,&nbsp;{{ name }}!</span>
+                    <a href="{{ url_for('logout') }}">
+                        <button class="btn btn-outline-light btn-sm ms-3">Logout</button>
+                    </a>
                 {% endif %}
             </div>
         </div>
@@ -102,48 +104,46 @@
     </section>
 
 
-        <!-- Features -->
-        <div class="features mt-5">
-            <div class="row">
-                <!-- Métodos de Pago -->
-                <div class="col-md-4">
-                    <div class="feature-box text-center">
-                        <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
-                        <h3>Compatibilidad con Métodos de Pago</h3>
-                        <p>MiFacturaPR es compatible con ATH Móvil, PayPal, Visa, Mastercard, Discover y pagos en efectivo.</p>
-                       
-                    </div>
+  <!-- Features -->
+<section class="features-section py-5" style="background-color: #233453;">
+    <div class="container">
+        <div class="row justify-content-center g-4">
+            <!-- Tarjeta 1 -->
+            <div class="col-md-4 d-flex">
+                <div class="feature-box text-center w-100 h-100">
+                    <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
+                    <h3>Compatibilidad con Métodos de Pago</h3>
+                    <p>MiFacturaPR es compatible con ATH Móvil, PayPal, Visa, Mastercard, Discover y pagos en efectivo.</p>
                 </div>
+            </div>
 
-                <!--Seguridad y Confianza -->
-                <div class="col-md-4">
-                    <div class="feature-box text-center">
-                        <i class="fas fa-lock fa-3x text-success mb-3"></i>
-                        <h3>Seguridad y Confianza</h3>
-                        <p>Protegemos tu información con los más altos estándares de seguridad para garantizar la privacidad de tus datos.</p>
-                    </div>
+            <!-- Tarjeta 2 -->
+            <div class="col-md-4 d-flex">
+                <div class="feature-box text-center w-100 h-100">
+                    <i class="fas fa-lock fa-3x text-success mb-3"></i>
+                    <h3>Seguridad y Confianza</h3>
+                    <p>Protegemos tu información con los más altos estándares de seguridad para garantizar la privacidad de tus datos.</p>
                 </div>
+            </div>
 
-                <!-- Recordatorios Inteligentes -->
-                <div class="col-md-4">
-                    <div class="feature-box text-center">
-                        <i class="fas fa-bell fa-3x text-warning mb-3"></i>
-                        <h3>Recordatorios Inteligentes</h3>
-                        <p>Recibe notificaciones antes de la fecha de vencimiento para evitar cargos adicionales y mantener tus servicios al día.</p>
-                    </div>
+            <!-- Tarjeta 3 -->
+            <div class="col-md-4 d-flex">
+                <div class="feature-box text-center w-100 h-100">
+                    <i class="fas fa-bell fa-3x text-warning mb-3"></i>
+                    <h3>Recordatorios Inteligentes</h3>
+                    <p>Recibe notificaciones antes de la fecha de vencimiento para evitar cargos adicionales y mantener tus servicios al día.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-
     <!-- LUMA  -->
     <section class="py-5" style="background-color: #171b33; color: white;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <img src="jobluma.png" alt="Trabajador de LUMA Energy" class="img-fluid rounded">
+                    <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Trabajador de LUMA Energy" class="img-fluid rounded">
                 </div>
                 <div class="col-md-6">
                     <h2>¿Qué es LUMA Energy?</h2>
@@ -164,7 +164,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 order-md-2">
-                    <img src="jobaaa.png" alt="Trabajador de Acueductos PR" class="img-fluid rounded">
+                    <img src="{{ url_for('static', filename='images/jobaaa.png') }}" alt="Trabajador de Acueductos PR" class="img-fluid rounded">
                 </div>
                 <div class="col-md-6 order-md-1">
                     <h2>¿Qué es la Autoridad de Acueductos?</h2>
