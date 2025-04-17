@@ -1,0 +1,96 @@
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #0b1e30; /* Fondo claro */
+    color: #4CAF50; /* Texto oscuro */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+}
+
+/* Ocultar la barra  */
+body::-webkit-scrollbar {
+    width: 8px; 
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;  /* Centra los elementos */
+    align-items: center;
+    background-color: #161B22;
+    padding: 22px 20px;
+    gap: 30px; 
+}
+
+/* Asegurar que los enlaces estén bien distribuidos */
+.navbar div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #4CAF50; /* Verde al pasar el mouse */
+}
+.activosobre {
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.logo {  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.perfil-card {
+    background-color: #171b33;
+    border: none;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+.perfil-card:hover {
+    transform: translateY(-5px);
+}
+.perfil-title {
+    font-weight: 600;
+}
+.perfil-btn {
+    border-radius: 8px;
+    font-weight: 500;
+    background-color: #007bff;
+    color: white;
+}
+/* Footer */
+.footer {
+    background: #161B22;
+    padding: 20px;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;  /* Asegura que el footer se expanda completamente */
+}
