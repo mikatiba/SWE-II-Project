@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Mi Perfil - MiFacturaPR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles01.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles13.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7x1z5l5e5c5e5e5e5e5e5e5e5e5e5e5e" crossorigin="anonymous">
 </head>
 <body>
     <header>
         <div class="navbar">
-            <a href="Homepage.html" class="home-button">
+            <a href="{{ url_for('home') }}" class="home-button">
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
             </a>
             <div>       
@@ -27,9 +27,9 @@
     </header>
     <div class="container py-5">
         <div class="text-center mb-5">
-            <img src="logo2.png" alt="Logo" class="rounded-circle mb-3" style="width: 100px;">
+            <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo" class="rounded-circle mb-3" style="width: 100px;">
             <h2 class="fw-bold">Configuración de Perfil</h2>
-            <p class="text-secondary">Gestiona tu cuenta y opciones de seguridad</p>
+            <p style="color: white;">Gestiona tu cuenta y opciones de seguridad</p>
 
             {% if mensaje == 'enlace_enviado' %}
                 <div class="alert alert-success mt-4" role="alert">

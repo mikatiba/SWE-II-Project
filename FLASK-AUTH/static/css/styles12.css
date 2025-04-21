@@ -91,7 +91,7 @@ main {
 
 
 /* Estilo especial para el enlace activo */
-.activoscontactos {
+.activocontactos {
     color: white;
     background-color: #4CAF50;
     font-weight: bold;

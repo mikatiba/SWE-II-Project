@@ -71,88 +71,100 @@
     </div>
 
     <!-- Overlay y Formulario de Pago -->
-    <div id="overlay" class="hidden"></div>
+<div id="overlay" class="hidden"></div>
 
-    <div id="formulario-pago" class="hidden">
-        <h2>Ingrese los números de la tarjeta</h2>
-        <form id="payment-form" method="POST" action="{{ url_for('procesar_pago') }}">
-            <input type="hidden" id="servicio" name="servicio">
-            <input type="hidden" id="payment-amount" name="amount">
-            <input type="hidden" id="expiry-hidden" name="expiry_date">
+<div id="formulario-pago" class="hidden">
+    <h2>Ingrese los números de la tarjeta</h2>
+    <form id="payment-form" method="POST" action="{{ url_for('procesar_pago') }}">
+        <input type="hidden" id="servicio" name="servicio">
+        <input type="hidden" id="payment-amount" name="amount">
+        <input type="hidden" id="expiry-hidden" name="expiry_date">
 
-            <label for="card-number">Número de Tarjeta:</label>
-            <div class="card-input-container">
-                <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required>
-                <div class="payment-icons">
-                    <i class="fab fa-cc-visa payment-icon"></i>
-                    <i class="fab fa-cc-mastercard payment-icon"></i>
-                    <i class="fab fa-cc-amex payment-icon"></i>
-                    <i class="fab fa-cc-paypal payment-icon"></i>
-                </div>
+        <!-- Número de tarjeta -->
+        <label for="card-number">Número de Tarjeta:</label>
+        <div class="card-input-container">
+            <input type="text" id="card-number" name="card_number"
+                   placeholder="1234 5678 9012 3456" required
+                   maxlength="19" oninput="formatearTarjeta(this)">
+            <div class="payment-icons">
+                <i class="fab fa-cc-visa payment-icon"></i>
+                <i class="fab fa-cc-mastercard payment-icon"></i>
+                <i class="fab fa-cc-amex payment-icon"></i>
+                <i class="fab fa-cc-paypal payment-icon"></i>
             </div>
+        </div>
 
-            <label for="expiry-date">Fecha de Expiración:</label>
-            <div style="display: flex; gap: 10px;">
-                <select id="expiry-month" required>
-                    <option value="" disabled selected>Mes</option>
-                    {% for m in range(1, 13) %}
-                        <option value="{{ '%02d' % m }}">{{ '%02d' % m }}</option>
-                    {% endfor %}
-                </select>
+        <!-- Fecha de Expiración -->
+        <label for="expiry-date">Fecha de Expiración:</label>
+        <div style="display: flex; gap: 10px;">
+            <select id="expiry-month" required>
+                <option value="" disabled selected>Mes</option>
+                {% for m in range(1, 13) %}
+                    <option value="{{ '%02d' % m }}">{{ '%02d' % m }}</option>
+                {% endfor %}
+            </select>
 
-                <select id="expiry-year" required>
-                    <option value="" disabled selected>Año</option>
-                    {% set current_year = current_year or 2025 %}
-                    {% for y in range(current_year, current_year + 11) %}
-                        <option value="{{ y }}">{{ y }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            <select id="expiry-year" required>
+                <option value="" disabled selected>Año</option>
+                {% set current_year = current_year or 2025 %}
+                {% for y in range(current_year, current_year + 11) %}
+                    <option value="{{ y }}">{{ y }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" placeholder="123" required>
+        <!-- CVV -->
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv"
+               placeholder="123" required
+               maxlength="4" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 4)">
 
-            <button type="submit" class="btn-pagar">Efectuar Pago</button>
-        </form>
-    </div>
+        <!-- Botón de pago -->
+        <button type="submit" class="btn-pagar">Efectuar Pago</button>
+    </form>
+</div>
 
-    <footer class="footer">
-        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
-    </footer>
+<!-- Script al final de tu HTML -->
+<script>
+    // Formato de tarjeta con espacios automáticos
+    function formatearTarjeta(input) {
+        let value = input.value.replace(/\D/g, '').slice(0, 16); // Solo números, máx 16 dígitos
+        input.value = value.replace(/(.{4})/g, '$1 ').trim(); // Espacio cada 4 dígitos
+    }
 
-    <script>
-        document.querySelectorAll('.pay-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const servicio = button.dataset.metodo;
-                const monto = button.dataset.amount;
-                const vencimiento = button.dataset.expiry;
+    // Mostrar formulario al hacer clic en Pagar
+    document.querySelectorAll('.pay-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const servicio = button.dataset.metodo;
+            const monto = button.dataset.amount;
+            const vencimiento = button.dataset.expiry;
 
-                document.getElementById('servicio').value = servicio;
-                document.getElementById('payment-amount').value = monto;
-                document.getElementById('expiry-hidden').value = vencimiento;
+            document.getElementById('servicio').value = servicio;
+            document.getElementById('payment-amount').value = monto;
+            document.getElementById('expiry-hidden').value = vencimiento;
 
-                document.getElementById('formulario-pago').classList.remove('hidden');
-                document.getElementById('overlay').classList.remove('hidden');
-            });
+            document.getElementById('formulario-pago').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
         });
+    });
 
-        document.getElementById('overlay').addEventListener('click', () => {
-            document.getElementById('formulario-pago').classList.add('hidden');
-            document.getElementById('overlay').classList.add('hidden');
-        });
+    // Cerrar formulario al hacer clic fuera
+    document.getElementById('overlay').addEventListener('click', () => {
+        document.getElementById('formulario-pago').classList.add('hidden');
+        document.getElementById('overlay').classList.add('hidden');
+    });
 
-        document.getElementById('payment-form').addEventListener('submit', function (e) {
-            const mes = document.getElementById('expiry-month').value;
-            const year = document.getElementById('expiry-year').value;
+    // Validar expiración antes de enviar
+    document.getElementById('payment-form').addEventListener('submit', function (e) {
+        const mes = document.getElementById('expiry-month').value;
+        const year = document.getElementById('expiry-year').value;
 
-            if (!mes || !year) {
-                alert("Por favor, seleccione mes y año válidos.");
-                e.preventDefault();
-                return;
-            }
+        if (!mes || !year) {
+            alert("Por favor, seleccione mes y año válidos.");
+            e.preventDefault();
+            return;
+        }
 
-            document.getElementById('expiry-hidden').value = `${mes}/${year.toString().slice(-2)}`;
-        });
-    </script>
-</body>
-</html>
+        document.getElementById('expiry-hidden').value = `${mes}/${year.toString().slice(-2)}`;
+    });
+</script>

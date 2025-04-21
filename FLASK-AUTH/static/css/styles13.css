@@ -83,8 +83,8 @@ body::-webkit-scrollbar {
 .perfil-btn {
     border-radius: 8px;
     font-weight: 500;
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: blue;
 }
 /* Footer */
 .footer {

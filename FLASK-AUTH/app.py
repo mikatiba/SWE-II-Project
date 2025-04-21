@@ -290,31 +290,58 @@ def facturas():
 
     return render_template('facturas.html', name=name, facturas=facturas)
 
+from flask import request, redirect, url_for, session, flash
+import re
+
 @app.route('/procesar_pago', methods=['POST'])
 def procesar_pago():
     if 'username' not in session:
         return redirect(url_for('login'))
 
     id_user = session.get('id_user')
-    numero_tarjeta = request.form['card_number']
-    fecha_expiracion = request.form['expiry_date']
-    monto = float(request.form['amount'])
+    numero_tarjeta = request.form.get('card_number', '').replace(' ', '')
+    fecha_expiracion = request.form.get('expiry_date', '')
+    monto = request.form.get('amount', '')
     servicio = request.form.get('servicio', 'LUMA')
 
+    # ✅ Validaciones
+    if not numero_tarjeta.isdigit() or len(numero_tarjeta) != 16:
+        flash("El número de tarjeta debe tener exactamente 16 dígitos.")
+        return redirect(url_for('facturas'))
+
+    cvv = request.form.get('cvv', '')
+    if not cvv.isdigit() or len(cvv) not in [3, 4]:
+        flash("El CVV debe tener 3 o 4 dígitos.")
+        return redirect(url_for('facturas'))
+
+    if not fecha_expiracion or not re.match(r'^\d{2}/\d{2}$', fecha_expiracion):
+        flash("Fecha de expiración inválida. Use el formato MM/AA.")
+        return redirect(url_for('facturas'))
+
+    try:
+        monto = float(monto)
+    except ValueError:
+        flash("Monto inválido.")
+        return redirect(url_for('facturas'))
+
+    # ✅ Buscar ID del servicio
     cur = mysql.connection.cursor()
     cur.execute("SELECT id_service FROM Service WHERE service_name = %s", (servicio,))
     service_row = cur.fetchone()
     if not service_row:
         cur.close()
-        return "Servicio no encontrado", 404
+        flash("Servicio no encontrado.")
+        return redirect(url_for('facturas'))
 
     id_service = service_row[0]
 
+    # ✅ Insertar el pago
     cur.execute("""
         INSERT INTO Payment (id_user, id_service, amount, payment_method, expiration_date, payment_number, payment_date)
         VALUES (%s, %s, %s, %s, %s, %s, NOW())
     """, (id_user, id_service, monto, 'Credit Card', fecha_expiracion, numero_tarjeta))
 
+    # ✅ Actualizar la factura como pagada
     cur.execute("""
         UPDATE Bill
         SET statement = 'Pagada'
@@ -326,6 +353,7 @@ def procesar_pago():
     mysql.connection.commit()
     cur.close()
 
+    flash("Pago realizado exitosamente.")
     return redirect(url_for('historial'))
 
 @app.route('/historial')
