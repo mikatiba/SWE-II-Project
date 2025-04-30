@@ -106,7 +106,7 @@
 
             <select id="expiry-year" required>
                 <option value="" disabled selected>Año</option>
-                {% set current_year = current_year or 2025 %}
+                {% set current_year = current_year or 2026 %}
                 {% for y in range(current_year, current_year + 11) %}
                     <option value="{{ y }}">{{ y }}</option>
                 {% endfor %}

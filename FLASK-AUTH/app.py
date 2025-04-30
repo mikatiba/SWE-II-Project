@@ -47,6 +47,12 @@ def register():
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']  # Asegúrate que este campo esté en tu HTML
+
+        # Validar que las contraseñas coincidan
+        if password != confirm_password:
+            error = "Las contraseñas no coinciden."
+            return render_template('register.html', error=error)
 
         cur = mysql.connection.cursor()
 
