@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,97 +9,120 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_luma.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        .nav-links a {
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50 !important;
+        }
+
+        .nav-links a.active,
+        .nav .text-white.text-decoration-none.active {
+            background-color: #45a049;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
     <header>
-        <div class="navbar">
-            <a href="Homepage.html" class="home-button">
-            <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
+        <div class="navbar d-flex justify-content-between align-items-center px-4 py-2" style="background-color: #161b22;">
+            <a href="{{ url_for('home') }}" class="home-button">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo rounded-circle" style="width: 50px; height: 50px;">
             </a>
             <div class="nav-links">
                 <ul class="nav d-flex gap-3 m-0 list-unstyled">
-                    <li><a href="{{ url_for('facturas') }}" class="text-white text-decoration-none">Facturas</a></li>
-                    <li><a href="{{ url_for('historial') }}" class="text-white text-decoration-none">Historial</a></li>
-                    <li><a href="{{ url_for('cuentas') }}" class="text-white text-decoration-none">Cuentas</a></li>
-                    <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none">Sobre</a></li>
-                    <li><a href="{{ url_for('contactos') }}" class="text-white text-decoration-none">Contactos</a></li>
+                    <li><a href="{{ url_for('facturas') }}" class="text-white text-decoration-none {% if request.endpoint == 'facturas' %}active{% endif %}">Facturas</a></li>
+                    <li><a href="{{ url_for('historial') }}" class="text-white text-decoration-none {% if request.endpoint == 'historial' %}active{% endif %}">Historial</a></li>
+                    <li><a href="{{ url_for('cuentas') }}" class="text-white text-decoration-none {% if request.endpoint == 'cuentas' %}active{% endif %}">Cuentas</a></li>
+                    <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none {% if request.endpoint == 'about' %}active{% endif %}">Sobre</a></li>
+                    <li><a href="{{ url_for('contactos') }}" class="text-white text-decoration-none {% if request.endpoint == 'contactos' %}active{% endif %}">Contactos</a></li>
                 </ul>
             </div>
-            <div class="auth-buttons">
-                <a href="{{ url_for('login') }}"><button class="btn login">Iniciar Sesión</button></a>
-                <a href="{{ url_for('register') }}"><button class="btn register">Registrarse</button></a>
+            <div class="auth-buttons d-flex gap-2">
+                {% if 'name' in session %}
+                    <span class="text-white">Bienvenido, {{ session['name'] }}!</span>
+                    <form action="{{ url_for('logout') }}" method="get">
+                        <button class="btn btn-secondary" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><button class="btn btn-outline-light">Iniciar Sesión</button></a>
+                    <a href="{{ url_for('register') }}"><button class="btn btn-success">Registrarse</button></a>
+                {% endif %}
             </div>
         </div>
     </header>
+
     <!-- Hero Section -->
     <main>
-        <section class="hero text-center py-5">
+        <section class="hero text-center py-5" style="background-color: #0b1523; color: white;">
             <div class="container">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Representativo" class="centered-image mb-4">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Representativo" class="centered-image mb-4" style="width: 150px;">
                 <h1 class="display-4">Bienvenido a MiFacturaPR</h1>
                 <p class="lead">Administra todas tus facturas en un solo lugar de manera rápida y segura.</p>
                 <div class="mt-4">
-                    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
-                    <a href="{{ url_for('register') }}" class="btn btn-success btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
+                    {% if 'username' not in session %}
+                        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                        <a href="{{ url_for('register') }}" class="btn btn-success btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
+                    {% endif %}
                 </div>
             </div>
         </section>
 
-<!-- Carousel Section -->
-<section class="carousel-section py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Explora nuestros servicios</h2>
-        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <img src="{{ url_for('static', filename='images/jobluma.png') }}" alt="Trabajador arreglando poste" class="d-block w-100">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>LUMA Energy</h5>
-                        <p>Gestiona tus pagos de electricidad de manera rápida y sencilla.</p>
+        <!-- Carousel Section -->
+        <section class="carousel-section py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Explora nuestros servicios</h2>
+                <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ url_for('static', filename='images/jobluma.png') }}" class="d-block w-100" alt="LUMA Energy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>LUMA Energy</h5>
+                                <p>Gestiona tus pagos de electricidad de manera rápida y sencilla.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='images/jobaaa.png') }}" class="d-block w-100" alt="AAA">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Acueductos de PR</h5>
+                                <p>Realiza tus pagos de agua con facilidad y mantén tus servicios al día.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='images/Sanjuan.jpeg') }}" class="d-block w-100" alt="San Juan">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>San Juan</h5>
+                                <p>Descubre cómo MiFacturaPR facilita tus pagos en la capital.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='images/logo2.png') }}" class="d-block w-100" alt="MiFacturaPR">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>MiFacturaPR</h5>
+                                <p>Tu plataforma confiable para gestionar todas tus facturas.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='images/jobaaa.png') }}" alt="Trabajador de acueductos" class="d-block w-100">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Acueductos de PR</h5>
-                        <p>Realiza tus pagos de agua con facilidad y mantén tus servicios al día.</p>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='images/Sanjuan.jpeg') }}" alt="Vista de San Juan" class="d-block w-100">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>San Juan</h5>
-                        <p>Descubre cómo MiFacturaPR facilita tus pagos en la capital.</p>
-                    </div>
-                </div>
-                <!-- Slide 4 -->
-                <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo de MiFacturaPR" class="d-block w-100">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>MiFacturaPR</h5>
-                        <p>Tu plataforma confiable para gestionar todas tus facturas.</p>
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
                 </div>
             </div>
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Features Section -->
-        <section class="features py-5 ">
+        <section class="features py-5">
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-4">
@@ -133,26 +156,26 @@
             </div>
         </section>
 
-        <!-- LUMA Energy y Acueductos  -->
+        <!-- Services Section -->
         <section class="services py-5">
             <div class="container">
-                <h2 class="text-center mb-5">Realiza pagos de LUMA y AAA </h2>
+                <h2 class="text-center mb-5">Realiza pagos de LUMA y AAA</h2>
                 <div class="row text-center">
                     <div class="col-md-6">
                         <div class="card service-box">
-                            <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA Energy" class="card-img-top service-image">
+                            <img src="{{ url_for('static', filename='images/luma_logo.png') }}" class="card-img-top" alt="LUMA Energy">
                             <div class="card-body">
-                                <h3 class="card-title">LUMA Energy PR</h3>
-                                <p class="card-text">Paga tus facturas de electricidad de manera rápida y sencilla con nuestra plataforma.</p>
+                                <h3>LUMA Energy PR</h3>
+                                <p>Paga tus facturas de electricidad de manera rápida y sencilla con nuestra plataforma.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card service-box">
-                            <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="Acueductos PR" class="card-img-top service-image">
+                            <img src="{{ url_for('static', filename='images/water_logo.png') }}" class="card-img-top" alt="Acueductos PR">
                             <div class="card-body">
-                                <h3 class="card-title">Acueductos de PR</h3>
-                                <p class="card-text">Gestiona tus pagos de agua con facilidad y mantén tus servicios al día.</p>
+                                <h3>Acueductos de PR</h3>
+                                <p>Gestiona tus pagos de agua con facilidad y mantén tus servicios al día.</p>
                             </div>
                         </div>
                     </div>

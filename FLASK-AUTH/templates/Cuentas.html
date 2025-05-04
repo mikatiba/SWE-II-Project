@@ -1,109 +1,91 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Cuentas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles03.css') }}"> 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}"> 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .contenedor-grafico {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        canvas {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="home-button">
-                <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
-            </a>
-            <div>
-                <a href="{{ url_for('facturas') }}">Facturas</a>
-                <a href="{{ url_for('historial') }}">Historial</a> 
-                <a href="{{ url_for('cuentas') }}" class="activocuentas">Cuentas</a>
-                <a href="{{ url_for('about') }}">Sobre</a>
-                <a href="{{ url_for('contactos') }}">Contactos</a>
-                <a href="{{ url_for('perfil') }}">Perfil</a>
-            </div>
-            <a href="{{ url_for('logout') }}"><button class="signout">Sign out</button></a>
+{% extends 'base.html' %}
+
+{% block title %}Mis Cuentas{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles03.css') }}"> 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .contenedor-grafico {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    canvas {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Mis Cuentas Asignadas</h1>
+
+    {% if cuentas %}
+        <ul class="lista-cuentas">
+            {% for cuenta in cuentas %}
+                <li>Número de cuenta: <strong>{{ cuenta }}</strong></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tienes cuentas asignadas.</p>
+    {% endif %}
+
+    <section class="grafico-pagos">
+        <h2>Distribución de Pagos por Servicio</h2>
+        <div class="contenedor-grafico">
+            <canvas id="graficoPagos"></canvas>
         </div>
-    </header>
+    </section>
+</main>
 
-    <main>
-        <h1>Mis Cuentas Asignadas</h1>
+<footer class="footer">
+    <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
+</footer>
+{% endblock %}
 
-        {% if cuentas %}
-            <ul class="lista-cuentas">
-                {% for cuenta in cuentas %}
-                    <li>Número de cuenta: <strong>{{ cuenta }}</strong></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No tienes cuentas asignadas.</p>
-        {% endif %}
+{% block scripts %}
+<script>
+    const labels = {{ labels | tojson }};
+    const data = {{ data | tojson }};
+    
+    const colors = labels.map(label => {
+        if (label === 'AAA') return 'rgba(54, 162, 235, 0.7)';
+        if (label === 'LUMA') return 'rgba(75, 192, 75, 0.7)';
+        return 'rgba(153, 102, 255, 0.7)';
+    });
 
-        <section class="grafico-pagos">
-            <h2>Distribución de Pagos por Servicio</h2>
-            <div class="contenedor-grafico">
-                <canvas id="graficoPagos"></canvas>
-            </div>
-        </section>
-    </main>
+    const borderColors = labels.map(label => {
+        if (label === 'AAA') return 'rgba(54, 162, 235, 1)';
+        if (label === 'LUMA') return 'rgba(75, 192, 75, 1)';
+        return 'rgba(153, 102, 255, 1)';
+    });
 
-    <footer class="footer">
-        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        const labels = {{ labels | tojson }};
-        const data = {{ data | tojson }};
-        
-        // Colores según servicio
-        const colors = labels.map(label => {
-            if (label === 'AAA') return 'rgba(54, 162, 235, 0.7)';   // Azul
-            if (label === 'LUMA') return 'rgba(75, 192, 75, 0.7)';   // Verde
-            return 'rgba(153, 102, 255, 0.7)'; // Otro servicio
-        });
-
-        const borderColors = labels.map(label => {
-            if (label === 'AAA') return 'rgba(54, 162, 235, 1)';
-            if (label === 'LUMA') return 'rgba(75, 192, 75, 1)';
-            return 'rgba(153, 102, 255, 1)';
-        });
-
-        const ctx = document.getElementById('graficoPagos').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Pagos por Servicio',
-                    data: data,
-                    backgroundColor: colors,
-                    borderColor: borderColors,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total de Pagos por Servicio'
-                    }
+    const ctx = document.getElementById('graficoPagos').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Pagos por Servicio',
+                data: data,
+                backgroundColor: colors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Total de Pagos por Servicio'
                 }
             }
-        });
-    </script>
-</body>
-</html>
+        }
+    });
+</script>
+{% endblock %}

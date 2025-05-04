@@ -1,76 +1,57 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mis Facturas</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles02.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
-    <script defer src="{{ url_for('static', filename='js/script05.js') }}"></script>
-</head>
-<body>
-    <div class="navbar">
-        <a href="{{ url_for('home') }}" class="home-button">
-            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Logo" class="logo">
-        </a>
-        <div>
-            <a href="{{ url_for('facturas') }}" class="activofactura">Facturas</a>
-            <a href="{{ url_for('historial') }}">Historial</a>
-            <a href="{{ url_for('cuentas') }}">Cuentas</a>
-            <a href="{{ url_for('about') }}">Sobre</a>
-            <a href="{{ url_for('contactos') }}">Contactos</a>
-            <a href="{{ url_for('perfil') }}">Perfil</a>
-        </div>
-        <a href="{{ url_for('logout') }}"><button class="signout">Sign out</button></a>
+{% extends 'base.html' %}
+
+{% block title %}Mis Facturas{% endblock %}
+
+{% block head_extra %}
+<script defer src="{{ url_for('static', filename='js/script05.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<h2>Mis Facturas</h2>
+
+{% for factura in facturas %}
+<div class="bill">
+    {% if factura[3] == 'LUMA' %}
+        <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
+    {% elif factura[3] == 'AAA' %}
+        <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
+    {% else %}
+        <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
+    {% endif %}
+
+    <div class="bill-info">
+        <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
+        <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
+
+        <button class="pay-button"
+                data-metodo="{{ factura[3] }}"
+                data-amount="{{ factura[1] }}"
+                data-expiry="{{ factura[2].strftime('%Y-%m-%d') }}">
+            PAGAR
+        </button>
+
+        <p><strong>Vence en:</strong>
+            {{ factura[2].strftime('%d') }} de
+            {% set mes = factura[2].strftime('%m') %}
+            {% if mes == '01' %}enero
+            {% elif mes == '02' %}febrero
+            {% elif mes == '03' %}marzo
+            {% elif mes == '04' %}abril
+            {% elif mes == '05' %}mayo
+            {% elif mes == '06' %}junio
+            {% elif mes == '07' %}julio
+            {% elif mes == '08' %}agosto
+            {% elif mes == '09' %}septiembre
+            {% elif mes == '10' %}octubre
+            {% elif mes == '11' %}noviembre
+            {% elif mes == '12' %}diciembre
+            {% endif %} del {{ factura[2].strftime('%Y') }}
+        </p>
     </div>
+</div>
+{% endfor %}
 
-    <div class="container">
-        <h2>Mis Facturas</h2>
-
-        {% for factura in facturas %}
-        <div class="bill">
-            {% if factura[3] == 'LUMA' %}
-                <img src="{{ url_for('static', filename='images/luma_logo.png') }}" alt="LUMA">
-            {% elif factura[3] == 'AAA' %}
-                <img src="{{ url_for('static', filename='images/water_logo.png') }}" alt="AAA">
-            {% else %}
-                <img src="{{ url_for('static', filename='images/default.png') }}" alt="Servicio">
-            {% endif %}
-
-            <div class="bill-info">
-                <h3>{{ factura[3] }} - {{ factura[4] }}</h3>
-                <p><strong>Balance actual:</strong> ${{ '%.2f' | format(factura[1]) }}</p>
-
-                <button class="pay-button"
-                        data-metodo="{{ factura[3] }}"
-                        data-amount="{{ factura[1] }}"
-                        data-expiry="{{ factura[2].strftime('%Y-%m-%d') }}">
-                    PAGAR
-                </button>
-
-                <p><strong>Vence en:</strong>
-                    {{ factura[2].strftime('%d') }} de
-                    {% set mes = factura[2].strftime('%m') %}
-                    {% if mes == '01' %}enero
-                    {% elif mes == '02' %}febrero
-                    {% elif mes == '03' %}marzo
-                    {% elif mes == '04' %}abril
-                    {% elif mes == '05' %}mayo
-                    {% elif mes == '06' %}junio
-                    {% elif mes == '07' %}julio
-                    {% elif mes == '08' %}agosto
-                    {% elif mes == '09' %}septiembre
-                    {% elif mes == '10' %}octubre
-                    {% elif mes == '11' %}noviembre
-                    {% elif mes == '12' %}diciembre
-                    {% endif %} del {{ factura[2].strftime('%Y') }}
-                </p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Overlay y Formulario de Pago -->
+<!-- Overlay y Formulario de Pago -->
 <div id="overlay" class="hidden"></div>
 
 <div id="formulario-pago" class="hidden">
@@ -80,7 +61,6 @@
         <input type="hidden" id="payment-amount" name="amount">
         <input type="hidden" id="expiry-hidden" name="expiry_date">
 
-        <!-- Número de tarjeta -->
         <label for="card-number">Número de Tarjeta:</label>
         <div class="card-input-container">
             <input type="text" id="card-number" name="card_number"
@@ -94,7 +74,6 @@
             </div>
         </div>
 
-        <!-- Fecha de Expiración -->
         <label for="expiry-date">Fecha de Expiración:</label>
         <div style="display: flex; gap: 10px;">
             <select id="expiry-month" required>
@@ -113,58 +92,54 @@
             </select>
         </div>
 
-        <!-- CVV -->
         <label for="cvv">CVV:</label>
         <input type="text" id="cvv" name="cvv"
-               placeholder="123" required
-               maxlength="4" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 4)">
+               placeholder="123" required maxlength="4"
+               oninput="this.value = this.value.replace(/\D/g, '').slice(0, 4)">
 
-        <!-- Botón de pago -->
         <button type="submit" class="btn-pagar">Efectuar Pago</button>
     </form>
 </div>
+{% endblock %}
 
-<!-- Script al final de tu HTML -->
+{% block scripts %}
 <script>
-    // Formato de tarjeta con espacios automáticos
-    function formatearTarjeta(input) {
-        let value = input.value.replace(/\D/g, '').slice(0, 16); // Solo números, máx 16 dígitos
-        input.value = value.replace(/(.{4})/g, '$1 ').trim(); // Espacio cada 4 dígitos
+function formatearTarjeta(input) {
+    let value = input.value.replace(/\D/g, '').slice(0, 16);
+    input.value = value.replace(/(.{4})/g, '$1 ').trim();
+}
+
+document.querySelectorAll('.pay-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const servicio = button.dataset.metodo;
+        const monto = button.dataset.amount;
+        const vencimiento = button.dataset.expiry;
+
+        document.getElementById('servicio').value = servicio;
+        document.getElementById('payment-amount').value = monto;
+        document.getElementById('expiry-hidden').value = vencimiento;
+
+        document.getElementById('formulario-pago').classList.remove('hidden');
+        document.getElementById('overlay').classList.remove('hidden');
+    });
+});
+
+document.getElementById('overlay').addEventListener('click', () => {
+    document.getElementById('formulario-pago').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
+});
+
+document.getElementById('payment-form').addEventListener('submit', function (e) {
+    const mes = document.getElementById('expiry-month').value;
+    const year = document.getElementById('expiry-year').value;
+
+    if (!mes || !year) {
+        alert("Por favor, seleccione mes y año válidos.");
+        e.preventDefault();
+        return;
     }
 
-    // Mostrar formulario al hacer clic en Pagar
-    document.querySelectorAll('.pay-button').forEach(button => {
-        button.addEventListener('click', () => {
-            const servicio = button.dataset.metodo;
-            const monto = button.dataset.amount;
-            const vencimiento = button.dataset.expiry;
-
-            document.getElementById('servicio').value = servicio;
-            document.getElementById('payment-amount').value = monto;
-            document.getElementById('expiry-hidden').value = vencimiento;
-
-            document.getElementById('formulario-pago').classList.remove('hidden');
-            document.getElementById('overlay').classList.remove('hidden');
-        });
-    });
-
-    // Cerrar formulario al hacer clic fuera
-    document.getElementById('overlay').addEventListener('click', () => {
-        document.getElementById('formulario-pago').classList.add('hidden');
-        document.getElementById('overlay').classList.add('hidden');
-    });
-
-    // Validar expiración antes de enviar
-    document.getElementById('payment-form').addEventListener('submit', function (e) {
-        const mes = document.getElementById('expiry-month').value;
-        const year = document.getElementById('expiry-year').value;
-
-        if (!mes || !year) {
-            alert("Por favor, seleccione mes y año válidos.");
-            e.preventDefault();
-            return;
-        }
-
-        document.getElementById('expiry-hidden').value = `${mes}/${year.toString().slice(-2)}`;
-    });
+    document.getElementById('expiry-hidden').value = `${mes}/${year.toString().slice(-2)}`;
+});
 </script>
+{% endblock %}

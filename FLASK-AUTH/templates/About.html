@@ -1,66 +1,47 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de - MiFacturaPR</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles11.css') }}"> 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <header>
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="home-button">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Home" class="logo">
-            </a>
-            <div>
-                <a href="{{ url_for('facturas') }}">Facturas</a>
-                <a href="{{ url_for('historial') }}">Historial</a> 
-                <a href="{{ url_for('cuentas') }}">Cuentas</a>
-                <a href="{{ url_for('about') }}" class="activosobre">Sobre</a>
-                <a href="{{ url_for('contactos') }}">Contactos</a>
-                <a href="{{ url_for('perfil') }}">Perfil</a>
+{% block title %}Acerca de - MiFacturaPR{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles11.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="logo-container" style="text-align: center; margin-top: 30px;">
+    <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="logo Representativo 2" class="centered-image" style="width: 120px;">
+</div>
+
+<main>
+    <section class="about" style="padding: 40px; text-align: center;">
+        <h1 style="margin-bottom: 20px;">Sobre MiFacturaPR</h1>
+        <p style="max-width: 800px; margin: 0 auto 40px;">
+            MiFacturaPR es una plataforma diseñada para simplificar el pago de tus facturas de agua y luz en Puerto Rico. 
+            Con un sistema de recordatorios inteligentes y una interfaz fácil de usar, ayudamos a los usuarios a gestionar 
+            sus pagos de manera rápida y sin complicaciones.
+        </p>
+
+        <div class="features" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
+            <div class="feature-box" style="max-width: 300px;">
+                <i class="fas fa-credit-card feature-icon" style="font-size: 40px; color: #4CAF50;"></i>
+                <h2>Facilidad de Pago</h2>
+                <p>Realiza tus pagos en un solo lugar sin necesidad de acceder a múltiples plataformas.</p>
+            </div>
+            <div class="feature-box" style="max-width: 300px;">
+                <i class="fas fa-bell feature-icon" style="font-size: 40px; color: #ffc107;"></i>
+                <h2>Recordatorios Inteligentes</h2>
+                <p>Recibe alertas antes de la fecha de vencimiento para evitar cargos adicionales.</p>
+            </div>
+            <div class="feature-box" style="max-width: 300px;">
+                <i class="fas fa-lock feature-icon" style="font-size: 40px; color: #2196f3;"></i>
+                <h2>Seguridad y Confianza</h2>
+                <p>Protegemos tu información con los más altos estándares de seguridad.</p>
             </div>
         </div>
-    </header>
+    </section>
+</main>
 
-    <div class="logo-container">
-        <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="logo Representativo 2" class="centered-image">
-    </div>
-
-    <main>
-        <section class="about">
-            <h1>Sobre MiFacturaPR</h1>
-            <p>MiFacturaPR es una plataforma diseñada para simplificar el pago de tus facturas de agua y luz en Puerto Rico. 
-               Con un sistema de recordatorios inteligentes y una interfaz fácil de usar, ayudamos a los usuarios a gestionar 
-               sus pagos de manera rápida y sin complicaciones.</p>
-
-            <div class="features">
-                <div class="feature-box">
-                    <i class="fas fa-credit-card feature-icon"></i>
-                    <h2>Facilidad de Pago</h2>
-                    <p>Realiza tus pagos en un solo lugar sin necesidad de acceder a múltiples plataformas.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-bell feature-icon"></i>
-                    <h2>Recordatorios Inteligentes</h2>
-                    <p>Recibe alertas antes de la fecha de vencimiento para evitar cargos adicionales.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-lock feature-icon"></i>
-                    <h2>Seguridad y Confianza</h2>
-                    <p>Protegemos tu información con los más altos estándares de seguridad.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
+<footer class="footer" style="text-align: center; padding: 20px; color: #ccc;">
+    <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
+</footer>
+{% endblock %}

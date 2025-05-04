@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MiFacturaPR{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles02.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
+    {% block head_extra %}{% endblock %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b1523;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #161b22;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #4CAF50;
+        }
+
+        .navbar .logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a.active {
+            background-color: #4CAF50;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background-color: #555;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-btn, .register-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .login-btn:hover {
+            background-color: white;
+            color: #161b22;
+        }
+
+        .register-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .register-btn:hover {
+            background-color: #45a049;
+        }
+
+        .welcome-msg {
+            margin-right: 8px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .footer {
+            background: #161b22;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Logo" class="logo">
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('facturas') }}" class="{% if request.endpoint == 'facturas' %}active{% endif %}">Facturas</a>
+            <a href="{{ url_for('historial') }}" class="{% if request.endpoint == 'historial' %}active{% endif %}">Historial</a>
+            <a href="{{ url_for('cuentas') }}" class="{% if request.endpoint == 'cuentas' %}active{% endif %}">Cuentas</a>
+            <a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">Sobre</a>
+            <a href="{{ url_for('contactos') }}" class="{% if request.endpoint == 'contactos' %}active{% endif %}">Contactos</a>
+            {% if 'username' in session %}
+                <a href="{{ url_for('perfil') }}" class="{% if request.endpoint == 'perfil' %}active{% endif %}">Perfil</a>
+            {% endif %}
+        </div>
+
+        <div class="nav-actions">
+            {% if 'username' in session %}
+            <span class="welcome-msg">
+                Bienvenido, {{ user_first_name }}!
+            </span>
+                <form action="{{ url_for('logout') }}" method="get" style="display:inline;">
+                    <button class="logout-btn" type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Iniciar Sesión</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 MiFacturaPR. Todos los derechos reservados.</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
