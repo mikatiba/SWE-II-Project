@@ -1,60 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Pagos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles04.css') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_mifactura.png') }}">
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="home-button">
-                <img src="{{ url_for('static', filename='images/logo_mifactura.png') }}" alt="Home" class="logo">
-            </a>
-            <div>
-                <a href="{{ url_for('facturas') }}">Facturas</a>
-                <a href="{{ url_for('historial') }}" class="activohistorial">Historial</a>
-                <a href="{{ url_for('cuentas') }}">Cuentas</a>
-                <a href="{{ url_for('about') }}">Sobre</a>
-                <a href="{{ url_for('contactos') }}">Contactos</a>
-                <a href="{{ url_for('perfil') }}">Perfil</a>
-            </div>
-            <a href="{{ url_for('logout') }}"><button class="signout">Sign out</button></a>
-        </div>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <div class="historial-container">
-            {% for pago in historial %}
-                {% set logo = 'luma_logo.png' if pago.servicio == 'LUMA' else 'water_logo.png' %}
-                <div class="pago">
-                    <img src="{{ url_for('static', filename='images/' + logo) }}" alt="{{ pago.servicio }}">
-                    <span class="monto verde">${{ '%.2f'|format(pago.total_amount) }}</span>
-                    <span class="estado">
-                        {{ pago.statement }} :
-                        {{ pago.issued_date.strftime('%d') }} de
-                        {% set mes = pago.issued_date.strftime('%m') %}
-                        {% if mes == '01' %}enero
-                        {% elif mes == '02' %}febrero
-                        {% elif mes == '03' %}marzo
-                        {% elif mes == '04' %}abril
-                        {% elif mes == '05' %}mayo
-                        {% elif mes == '06' %}junio
-                        {% elif mes == '07' %}julio
-                        {% elif mes == '08' %}agosto
-                        {% elif mes == '09' %}septiembre
-                        {% elif mes == '10' %}octubre
-                        {% elif mes == '11' %}noviembre
-                        {% elif mes == '12' %}diciembre
-                        {% endif %} del {{ pago.issued_date.strftime('%Y') }}
-                    </span>
-                </div>
-            {% else %}
-                <p>No hay pagos registrados aún.</p>
-            {% endfor %}
+{% block title %}Historial de Pagos{% endblock %}
+
+{% block content %}
+<div class="historial-container">
+    {% for pago in historial %}
+        {% set logo = 'luma_logo.png' if pago.servicio == 'LUMA' else 'water_logo.png' %}
+        <div class="pago">
+            <img src="{{ url_for('static', filename='images/' + logo) }}" alt="{{ pago.servicio }}">
+            <span class="monto verde">${{ '%.2f'|format(pago.total_amount) }}</span>
+            <span class="estado">
+                {{ pago.statement }} :
+                {{ pago.issued_date.strftime('%d') }} de
+                {% set mes = pago.issued_date.strftime('%m') %}
+                {% if mes == '01' %}enero
+                {% elif mes == '02' %}febrero
+                {% elif mes == '03' %}marzo
+                {% elif mes == '04' %}abril
+                {% elif mes == '05' %}mayo
+                {% elif mes == '06' %}junio
+                {% elif mes == '07' %}julio
+                {% elif mes == '08' %}agosto
+                {% elif mes == '09' %}septiembre
+                {% elif mes == '10' %}octubre
+                {% elif mes == '11' %}noviembre
+                {% elif mes == '12' %}diciembre
+                {% endif %} del {{ pago.issued_date.strftime('%Y') }}
+            </span>
         </div>
-    </main>
-</body>
-</html>
+    {% else %}
+        <p>No hay pagos registrados aún.</p>
+    {% endfor %}
+</div>
+{% endblock %}
