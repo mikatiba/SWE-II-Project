@@ -9,22 +9,52 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_luma.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
         .nav-links a {
             transition: all 0.3s ease;
         }
-
+    
         .nav-links a:hover {
             color: #4CAF50 !important;
         }
-
+    
         .nav-links a.active,
         .nav .text-white.text-decoration-none.active {
             background-color: #45a049;
             padding: 6px 16px;
             border-radius: 6px;
             font-weight: bold;
+        }
+    
+        .btn-outline-custom {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-outline-custom:hover {
+            background-color: white !important;
+            color: #161b22 !important;
+            border-color: white !important;
+        }
+    
+        .btn-green {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+        }
+    
+        .btn-green:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -51,8 +81,12 @@
                         <button class="btn btn-secondary" type="submit">Logout</button>
                     </form>
                 {% else %}
-                    <a href="{{ url_for('login') }}"><button class="btn btn-outline-light">Iniciar Sesión</button></a>
-                    <a href="{{ url_for('register') }}"><button class="btn btn-success">Registrarse</button></a>
+                    <a href="{{ url_for('login') }}">
+                        <button class="btn-outline-custom">Iniciar Sesión</button>
+                    </a>
+                    <a href="{{ url_for('register') }}">
+                        <button class="btn-green">Registrarse</button>
+                    </a>
                 {% endif %}
             </div>
         </div>
@@ -67,96 +101,94 @@
                 <p class="lead">Administra todas tus facturas en un solo lugar de manera rápida y segura.</p>
                 <div class="mt-4">
                     {% if 'username' not in session %}
-                        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
-                        <a href="{{ url_for('register') }}" class="btn btn-success btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-custom btn-lg me-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                        <a href="{{ url_for('register') }}" class="btn btn-green btn-lg"><i class="fas fa-user-plus"></i> Registrarse</a>
                     {% endif %}
                 </div>
             </div>
         </section>
-
-        <!-- Carousel Section -->
-        <section class="carousel-section py-5">
-            <div class="container">
-                <h2 class="text-center mb-4">Explora nuestros servicios</h2>
-                <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/jobluma.png') }}" class="d-block w-100" alt="LUMA Energy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>LUMA Energy</h5>
-                                <p>Gestiona tus pagos de electricidad de manera rápida y sencilla.</p>
+                <!-- Carousel Section -->
+                <section class="carousel-section py-5">
+                    <div class="container">
+                        <h2 class="text-center mb-4">Explora nuestros servicios</h2>
+                        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{{ url_for('static', filename='images/jobluma.png') }}" class="d-block w-100" alt="LUMA Energy">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>LUMA Energy</h5>
+                                        <p>Gestiona tus pagos de electricidad de manera rápida y sencilla.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{ url_for('static', filename='images/jobaaa.png') }}" class="d-block w-100" alt="AAA">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Acueductos de PR</h5>
+                                        <p>Realiza tus pagos de agua con facilidad y mantén tus servicios al día.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{ url_for('static', filename='images/Sanjuan.jpeg') }}" class="d-block w-100" alt="San Juan">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>San Juan</h5>
+                                        <p>Descubre cómo MiFacturaPR facilita tus pagos en la capital.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{ url_for('static', filename='images/logo2.png') }}" class="d-block w-100" alt="MiFacturaPR">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>MiFacturaPR</h5>
+                                        <p>Tu plataforma confiable para gestionar todas tus facturas.</p>
+                                    </div>
+                                </div>
                             </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
                         </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/jobaaa.png') }}" class="d-block w-100" alt="AAA">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Acueductos de PR</h5>
-                                <p>Realiza tus pagos de agua con facilidad y mantén tus servicios al día.</p>
+                    </div>
+                </section>
+        
+                <!-- Features Section -->
+                <section class="features py-5">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="card feature-box">
+                                    <div class="card-body">
+                                        <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
+                                        <h3>Facilidad de Pago</h3>
+                                        <p>Realiza tus pagos en un solo lugar sin necesidad de acceder a múltiples plataformas.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Sanjuan.jpeg') }}" class="d-block w-100" alt="San Juan">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>San Juan</h5>
-                                <p>Descubre cómo MiFacturaPR facilita tus pagos en la capital.</p>
+                            <div class="col-md-4">
+                                <div class="card feature-box">
+                                    <div class="card-body">
+                                        <i class="fas fa-bell fa-3x text-warning mb-3"></i>
+                                        <h3>Recordatorios Inteligentes</h3>
+                                        <p>Recibe alertas antes de la fecha de vencimiento para evitar cargos adicionales.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/logo2.png') }}" class="d-block w-100" alt="MiFacturaPR">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>MiFacturaPR</h5>
-                                <p>Tu plataforma confiable para gestionar todas tus facturas.</p>
+                            <div class="col-md-4">
+                                <div class="card feature-box">
+                                    <div class="card-body">
+                                        <i class="fas fa-lock fa-3x text-success mb-3"></i>
+                                        <h3>Seguridad y Confianza</h3>
+                                        <p>Protegemos tu información con los más altos estándares de seguridad.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features py-5">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <div class="card feature-box">
-                            <div class="card-body">
-                                <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
-                                <h3>Facilidad de Pago</h3>
-                                <p>Realiza tus pagos en un solo lugar sin necesidad de acceder a múltiples plataformas.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card feature-box">
-                            <div class="card-body">
-                                <i class="fas fa-bell fa-3x text-warning mb-3"></i>
-                                <h3>Recordatorios Inteligentes</h3>
-                                <p>Recibe alertas antes de la fecha de vencimiento para evitar cargos adicionales.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card feature-box">
-                            <div class="card-body">
-                                <i class="fas fa-lock fa-3x text-success mb-3"></i>
-                                <h3>Seguridad y Confianza</h3>
-                                <p>Protegemos tu información con los más altos estándares de seguridad.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
+                </section>
+                        <!-- Services Section -->
         <section class="services py-5">
             <div class="container">
                 <h2 class="text-center mb-5">Realiza pagos de LUMA y AAA</h2>

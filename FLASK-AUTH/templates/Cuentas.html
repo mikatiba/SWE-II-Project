@@ -3,40 +3,90 @@
 {% block title %}Mis Cuentas{% endblock %}
 
 {% block head_extra %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles03.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles03.css') }}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-    .contenedor-grafico {
-        max-width: 400px;
-        margin: 0 auto;
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px 20px;
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
     }
+
+    .cuenta-box {
+        background-color: #1c1f2e;
+        border-radius: 16px;
+        padding: 20px 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        margin-bottom: 40px;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .cuenta-box h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .cuenta-box p {
+        font-size: 18px;
+        color: #a8b3cf;
+    }
+
+    .grafico-pagos {
+        background-color: #1c1f2e;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .grafico-pagos h2 {
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    .contenedor-grafico {
+        width: 100%;
+    }
+
     canvas {
         max-width: 100%;
         height: auto;
+    }
+
+    @media (max-width: 600px) {
+        .cuenta-box, .grafico-pagos {
+            padding: 20px;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <main>
-    <h1>Mis Cuentas Asignadas</h1>
+    <h1 style="margin-bottom: 30px;">Mis Cuentas Asignadas</h1>
 
     {% if cuentas %}
-        <ul class="lista-cuentas">
-            {% for cuenta in cuentas %}
-                <li>Número de cuenta: <strong>{{ cuenta }}</strong></li>
-            {% endfor %}
-        </ul>
+        <div class="cuenta-box">
+            <h2>Número de cuenta</h2>
+            <p><strong>{{ cuentas[0] }}</strong></p>
+        </div>
     {% else %}
         <p>No tienes cuentas asignadas.</p>
     {% endif %}
 
-    <section class="grafico-pagos">
+    <div class="grafico-pagos">
         <h2>Distribución de Pagos por Servicio</h2>
         <div class="contenedor-grafico">
             <canvas id="graficoPagos"></canvas>
         </div>
-    </section>
+    </div>
 </main>
 
 <footer class="footer">
@@ -48,7 +98,7 @@
 <script>
     const labels = {{ labels | tojson }};
     const data = {{ data | tojson }};
-    
+
     const colors = labels.map(label => {
         if (label === 'AAA') return 'rgba(54, 162, 235, 0.7)';
         if (label === 'LUMA') return 'rgba(75, 192, 75, 0.7)';
@@ -79,10 +129,14 @@
             plugins: {
                 legend: {
                     position: 'bottom',
+                    labels: {
+                        color: '#fff'
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Total de Pagos por Servicio'
+                    text: 'Total de Pagos por Servicio',
+                    color: '#ccc'
                 }
             }
         }

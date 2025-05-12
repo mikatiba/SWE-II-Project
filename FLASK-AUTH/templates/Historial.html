@@ -2,34 +2,106 @@
 
 {% block title %}Historial de Pagos{% endblock %}
 
+{% block head_extra %}
+<style>
+    .historial-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pago {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #1e2a38;
+        padding: 20px 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+        width: 100%;
+    }
+
+    .pago:hover {
+        transform: translateY(-3px);
+    }
+
+    .pago img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        background: white;
+        padding: 5px;
+        object-fit: contain;
+        margin-right: 30px;
+    }
+
+    .pago-info {
+        flex-grow: 1;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .texto-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .monto {
+        font-size: 20px;
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    .estado {
+        font-size: 15px;
+        color: #cccccc;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="historial-container">
     {% for pago in historial %}
         {% set logo = 'luma_logo.png' if pago.servicio == 'LUMA' else 'water_logo.png' %}
         <div class="pago">
             <img src="{{ url_for('static', filename='images/' + logo) }}" alt="{{ pago.servicio }}">
-            <span class="monto verde">${{ '%.2f'|format(pago.total_amount) }}</span>
-            <span class="estado">
-                {{ pago.statement }} :
-                {{ pago.issued_date.strftime('%d') }} de
-                {% set mes = pago.issued_date.strftime('%m') %}
-                {% if mes == '01' %}enero
-                {% elif mes == '02' %}febrero
-                {% elif mes == '03' %}marzo
-                {% elif mes == '04' %}abril
-                {% elif mes == '05' %}mayo
-                {% elif mes == '06' %}junio
-                {% elif mes == '07' %}julio
-                {% elif mes == '08' %}agosto
-                {% elif mes == '09' %}septiembre
-                {% elif mes == '10' %}octubre
-                {% elif mes == '11' %}noviembre
-                {% elif mes == '12' %}diciembre
-                {% endif %} del {{ pago.issued_date.strftime('%Y') }}
-            </span>
+            <div class="pago-info">
+                <div class="texto-info">
+                    <div class="monto">${{ '%.2f'|format(pago.total_amount) }}</div>
+                    <div class="estado">
+                        {{ pago.statement }} :
+                        {{ pago.issued_date.strftime('%d') }} de
+                        {% set mes = pago.issued_date.strftime('%m') %}
+                        {% if mes == '01' %}enero
+                        {% elif mes == '02' %}febrero
+                        {% elif mes == '03' %}marzo
+                        {% elif mes == '04' %}abril
+                        {% elif mes == '05' %}mayo
+                        {% elif mes == '06' %}junio
+                        {% elif mes == '07' %}julio
+                        {% elif mes == '08' %}agosto
+                        {% elif mes == '09' %}septiembre
+                        {% elif mes == '10' %}octubre
+                        {% elif mes == '11' %}noviembre
+                        {% elif mes == '12' %}diciembre
+                        {% endif %} del {{ pago.issued_date.strftime('%Y') }}
+                    </div>
+                </div>
+                <div class="servicio" style="color:#aaa; font-size:14px; text-align:right;">
+                    {{ pago.servicio }}
+                </div>
+            </div>
         </div>
     {% else %}
-        <p>No hay pagos registrados aún.</p>
+        <p style="color: white;">No hay pagos registrados aún.</p>
     {% endfor %}
 </div>
 {% endblock %}
