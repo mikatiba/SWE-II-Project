@@ -52,3 +52,5 @@ SWE-II-Project/
 Puedes consultar la presentación del Product Backlog aquí:
 
 [Presentación sobre el proyecto (PDF)](docs/Product%20Backlog.pdf)
+[Presentación del Proyecto Final (PDF)](docs/ProyectoFinalMiFacturaPR.pdf) 
+[Presentación del Proyecto (Video)] (https://github.com/jmercado7908/SWE-II-Project.git)
